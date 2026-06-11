@@ -3,33 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Casa do Lanche | Cardápio Digital</title>
+  <meta name="description" content="Mega Lanches - cardapio digital com lanches, pizzas, combos, acai, porcoes, sucos e bebidas." />
+  <title>Mega Lanches | Cardapio Digital</title>
 
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap");
+
     :root{
-      --bg:#080808;
-      --bg-2:#111111;
-      --bg-3:#1a1a1a;
-      --yellow:#ffe600;
-      --yellow-2:#ffd000;
-      --text:#ffffff;
-      --muted:#c9c9c9;
-      --dark:#101010;
-      --gray:#262626;
+      --black:#060606;
+      --black-2:#101010;
+      --black-3:#181818;
+      --orange:#ff7a18;
+      --orange-2:#ff9a2f;
+      --red:#ef1c24;
+      --cream:#fff6e8;
+      --paper:#faf7f2;
+      --line:#ece2d7;
+      --text:#17130f;
+      --muted:#6f6258;
       --white:#ffffff;
       --green:#25d366;
-      --danger:#ff4d4d;
-      --shadow:0 18px 50px rgba(0,0,0,.32);
-      --radius:20px;
-      --radius-sm:14px;
-      --container:min(1180px, 92%);
+      --shadow:0 18px 48px rgba(0,0,0,.18);
+      --shadow-strong:0 24px 80px rgba(0,0,0,.42);
+      --container:min(1180px, calc(100% - 32px));
     }
 
     *{
+      box-sizing:border-box;
       margin:0;
       padding:0;
-      box-sizing:border-box;
-      font-family: Arial, Helvetica, sans-serif;
     }
 
     html{
@@ -37,14 +39,21 @@
     }
 
     body{
-      background:var(--bg);
+      min-height:100vh;
       color:var(--text);
+      background:var(--paper);
+      font-family:"Inter", Arial, sans-serif;
       overflow-x:hidden;
     }
 
-    img{
-      max-width:100%;
-      display:block;
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:100;
+      opacity:.16;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.28'/%3E%3C/svg%3E");
     }
 
     a{
@@ -52,307 +61,366 @@
       text-decoration:none;
     }
 
+    img{
+      display:block;
+      max-width:100%;
+    }
+
+    button,
+    input{
+      font:inherit;
+    }
+
     .container{
       width:var(--container);
       margin:0 auto;
     }
 
-    /* HEADER */
-    header{
+    .reveal{
+      opacity:0;
+      transform:translateY(28px);
+      transition:opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .top-strip{
       position:fixed;
       top:0;
       left:0;
+      z-index:50;
       width:100%;
-      z-index:999;
-      background:linear-gradient(180deg, rgba(5,5,5,.92), rgba(5,5,5,.72));
+      background:linear-gradient(90deg, var(--red), var(--orange), var(--red));
+      color:#170b03;
+      font-size:.76rem;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      text-align:center;
+      padding:7px 12px;
+    }
+
+    header{
+      position:fixed;
+      top:30px;
+      left:0;
+      width:100%;
+      z-index:49;
+      background:rgba(6,6,6,.82);
+      border-bottom:1px solid rgba(255,122,24,.28);
       backdrop-filter:blur(18px);
-      border-bottom:1px solid rgba(255,230,0,.14);
+      transition:.25s ease;
+    }
+
+    header.scrolled{
+      top:30px;
+      background:rgba(6,6,6,.94);
+      box-shadow:0 18px 50px rgba(0,0,0,.24);
     }
 
     .nav{
-      min-height:88px;
+      min-height:76px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:26px;
+      gap:22px;
     }
 
     .brand{
       display:flex;
       align-items:center;
-      gap:14px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:1.4px;
+      gap:12px;
+      color:var(--white);
       min-width:max-content;
     }
 
-    .logo-mark{
+    .mega-logo{
+      width:58px;
+      height:58px;
       position:relative;
-      flex-shrink:0;
       display:grid;
       place-items:center;
-      color:#151515;
-      background:var(--yellow);
-      box-shadow:0 0 28px rgba(255,230,0,.28);
+      border:2px solid var(--red);
+      border-radius:50%;
+      background:#050505;
+      box-shadow:0 0 26px rgba(255,66,24,.26);
       overflow:hidden;
     }
 
-    .logo-mark::before,
-    .logo-mark::after{
-      content:"";
+    .mega-logo::before,
+    .mega-logo::after{
       position:absolute;
-      background:rgba(255,255,255,.78);
-      transform:rotate(-38deg);
-      transform-origin:center;
-    }
-
-    .logo-mark::before{
-      width:140%;
-      height:3px;
-      top:20%;
-      left:-38%;
-    }
-
-    .logo-mark::after{
-      width:140%;
-      height:3px;
-      right:-38%;
-      bottom:20%;
-    }
-
-    .logo-house{
-      position:relative;
-      z-index:1;
-      display:grid;
-      place-items:center;
-      width:64%;
-      height:60%;
-      background:var(--yellow);
-      clip-path:polygon(50% 0,100% 34%,100% 100%,0 100%,0 34%);
-      font-weight:900;
-      text-align:center;
-      line-height:.96;
-      letter-spacing:.08em;
+      left:50%;
+      transform:translateX(-50%);
+      font-family:"Anton", Impact, sans-serif;
+      line-height:1;
+      letter-spacing:.04em;
       text-transform:uppercase;
     }
 
-    .logo-mark-small{
-      width:58px;
-      height:58px;
-      border:2px solid var(--yellow);
+    .mega-logo::before{
+      content:"MEGA";
+      top:8px;
+      color:var(--orange);
+      font-size:13px;
+    }
+
+    .mega-logo::after{
+      content:"LANCHES";
+      bottom:8px;
+      color:var(--red);
+      font-size:12px;
+    }
+
+    .burger-mark{
+      position:relative;
+      width:31px;
+      height:24px;
+      margin-top:4px;
+      border-radius:16px 16px 10px 10px;
+      background:linear-gradient(#f9a43a 0 42%, #f3d35d 42% 50%, #5fbf46 50% 58%, #de2a1e 58% 70%, #8a3f19 70% 86%, #f29a2f 86%);
+      box-shadow:0 0 0 2px rgba(0,0,0,.25) inset;
+    }
+
+    .burger-mark::before,
+    .burger-mark::after{
+      content:"";
+      position:absolute;
+      top:7px;
+      width:5px;
+      height:5px;
       border-radius:50%;
-      background:
-        radial-gradient(circle at 25% 20%, rgba(255,255,255,.9), transparent 0 8px),
-        linear-gradient(135deg, #f7f7f7 0 22%, #d7d7d7 22% 24%, transparent 24%),
-        url("https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=220&q=80") center/cover;
+      background:#fff;
+      box-shadow:0 0 0 1px #111 inset;
     }
 
-    .logo-mark-small .logo-house{
-      font-size:7px;
-    }
+    .burger-mark::before{ left:8px; }
+    .burger-mark::after{ right:8px; }
 
-    .brand strong{
-      font-size:1.2rem;
+    .brand-title{
+      display:grid;
       line-height:1;
     }
 
-    .brand span{
-      color:var(--yellow);
+    .brand-title strong{
+      font-family:"Anton", Impact, sans-serif;
+      font-size:1.5rem;
+      letter-spacing:.04em;
+      color:var(--orange);
+    }
+
+    .brand-title span{
+      color:#f9f0e4;
+      font-size:.78rem;
+      font-weight:800;
+      letter-spacing:.13em;
+      text-transform:uppercase;
     }
 
     .nav-links{
       display:flex;
       align-items:center;
-      gap:30px;
-      font-weight:800;
+      gap:24px;
+      color:#f2dfce;
+      font-size:.78rem;
+      font-weight:900;
+      letter-spacing:.11em;
       text-transform:uppercase;
-      font-size:.84rem;
-      letter-spacing:1.2px;
-      color:#d8d8d8;
     }
 
-    .nav-links a:hover{
-      color:var(--yellow);
+    .nav-links a{
+      position:relative;
+      padding:6px 0;
+    }
+
+    .nav-links a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:0;
+      width:0;
+      height:2px;
+      background:var(--orange);
+      transition:.2s ease;
+    }
+
+    .nav-links a:hover::after{
+      width:100%;
     }
 
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:10px;
-      border:none;
+      min-height:46px;
+      border:0;
+      border-radius:8px;
       cursor:pointer;
-      font-weight:900;
+      color:#140a04;
+      background:linear-gradient(135deg, var(--orange), #ffd24d);
+      padding:0 22px;
+      font-weight:950;
+      letter-spacing:.06em;
       text-transform:uppercase;
-      letter-spacing:1px;
-      transition:.25s ease;
-      text-decoration:none;
+      box-shadow:0 14px 32px rgba(255,122,24,.22);
+      transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
     }
 
-    .btn-primary{
-      background:var(--yellow);
-      color:#111;
-      padding:16px 28px;
-      clip-path:polygon(7% 0,100% 0,93% 100%,0 100%);
-      box-shadow:0 18px 34px rgba(255,230,0,.16);
-    }
-
-    .btn-primary:hover{
-      background:var(--yellow-2);
+    .btn:hover{
       transform:translateY(-2px);
+      filter:saturate(1.1);
+      box-shadow:0 18px 42px rgba(255,122,24,.3);
     }
 
     .btn-outline{
-      background:rgba(255,255,255,.04);
-      color:#fff;
-      border:1px solid rgba(255,255,255,.18);
-      padding:15px 24px;
-      clip-path:polygon(7% 0,100% 0,93% 100%,0 100%);
-      backdrop-filter:blur(10px);
+      color:var(--white);
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.2);
+      box-shadow:none;
     }
 
-    .btn-outline:hover{
-      background:#fff;
-      color:#111;
-    }
-
-    /* HERO */
     .hero{
       min-height:100vh;
-      padding:126px 0 72px;
+      position:relative;
       display:flex;
       align-items:center;
-      position:relative;
       overflow:hidden;
+      padding:142px 0 78px;
+      color:var(--white);
       background:
-        linear-gradient(90deg, rgba(0,0,0,.96) 0%, rgba(0,0,0,.82) 42%, rgba(0,0,0,.5) 100%),
-        radial-gradient(circle at 82% 45%, rgba(255,230,0,.28), transparent 0 24%),
-        radial-gradient(circle at 14% 18%, rgba(255,94,0,.18), transparent 0 28%),
-        url("https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1900&q=90") center/cover no-repeat;
+        linear-gradient(120deg, rgba(0,0,0,.92) 0 42%, rgba(0,0,0,.72) 68%, rgba(0,0,0,.92) 100%),
+        url("https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1800&q=88") center/cover;
     }
 
     .hero::before{
       content:"";
       position:absolute;
-      inset:0;
+      top:86px;
+      left:0;
+      width:100%;
+      height:120px;
       background:
-        linear-gradient(180deg, rgba(0,0,0,.48), transparent 34%, rgba(0,0,0,.8) 100%),
-        repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 120px);
-      pointer-events:none;
+        linear-gradient(90deg, transparent 0 7%, var(--orange) 7% 74%, transparent 74%),
+        linear-gradient(180deg, transparent 0 64%, rgba(0,0,0,.75) 64%);
+      clip-path:polygon(0 0, 100% 0, 100% 76%, 70% 64%, 28% 94%, 0 72%);
+      opacity:.95;
     }
 
     .hero::after{
       content:"";
       position:absolute;
-      left:0;
-      right:0;
-      bottom:0;
+      inset:auto 0 0;
       height:170px;
-      background:linear-gradient(transparent, var(--bg));
+      background:linear-gradient(0deg, var(--paper), transparent);
+      pointer-events:none;
     }
 
     .hero-grid{
       position:relative;
       z-index:2;
       display:grid;
-      grid-template-columns:minmax(0, 1fr) minmax(420px, .92fr);
+      grid-template-columns:minmax(0, 1fr) minmax(360px, 520px);
       align-items:center;
-      gap:58px;
-      width:100%;
-    }
-
-    .hero-copy{
-      max-width:680px;
+      gap:54px;
     }
 
     .tag{
       display:inline-flex;
       align-items:center;
-      gap:10px;
-      padding:11px 16px;
-      border:1px solid rgba(255,230,0,.34);
-      color:var(--yellow);
-      background:linear-gradient(90deg, rgba(255,230,0,.13), rgba(255,255,255,.03));
-      font-size:.78rem;
-      font-weight:900;
+      gap:9px;
+      margin-bottom:22px;
+      color:#1a0d04;
+      background:var(--orange);
+      border-radius:999px;
+      padding:9px 16px;
+      font-size:.76rem;
+      font-weight:950;
+      letter-spacing:.13em;
       text-transform:uppercase;
-      letter-spacing:1.8px;
-      margin-bottom:24px;
-      clip-path:polygon(7% 0,100% 0,93% 100%,0 100%);
+    }
+
+    .tag::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#18c65b;
+      box-shadow:0 0 0 6px rgba(24,198,91,.18);
     }
 
     .hero h1{
-      font-size:clamp(3.7rem, 7.4vw, 7.4rem);
-      line-height:.88;
+      max-width:760px;
+      font-family:"Anton", Impact, sans-serif;
+      font-size:clamp(4rem, 9vw, 8.7rem);
+      font-weight:400;
+      line-height:.86;
+      letter-spacing:.01em;
       text-transform:uppercase;
-      letter-spacing:0;
-      margin-bottom:22px;
-      text-shadow:0 14px 40px rgba(0,0,0,.55);
+      text-shadow:0 10px 35px rgba(0,0,0,.52);
     }
 
     .hero h1 span{
-      color:var(--yellow);
       display:block;
-    }
-
-    .hero-line{
-      width:88px;
-      height:4px;
-      background:linear-gradient(90deg, var(--yellow), #ff5b1a);
-      margin-bottom:24px;
+      color:var(--orange);
+      -webkit-text-stroke:1px rgba(255,255,255,.1);
     }
 
     .hero p{
-      color:#e3e3e3;
-      font-size:1.14rem;
+      max-width:620px;
+      margin:24px 0 28px;
+      color:#f5e5d5;
+      font-size:1.08rem;
       line-height:1.75;
-      max-width:590px;
-      margin-bottom:28px;
     }
 
     .hero-actions{
       display:flex;
       flex-wrap:wrap;
-      gap:14px;
-      margin-bottom:30px;
+      gap:13px;
+      margin-bottom:26px;
     }
 
     .hero-proof{
       display:grid;
       grid-template-columns:repeat(3, minmax(0, 1fr));
       gap:12px;
-      max-width:640px;
+      max-width:680px;
     }
 
     .proof-item{
-      min-height:92px;
+      min-height:86px;
       padding:16px;
-      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.035));
       border:1px solid rgba(255,255,255,.12);
-      backdrop-filter:blur(12px);
+      border-radius:8px;
+      background:rgba(255,255,255,.055);
+      backdrop-filter:blur(10px);
     }
 
     .proof-item strong{
       display:block;
-      color:var(--yellow);
-      font-size:1.35rem;
+      color:var(--orange);
+      font-family:"Anton", Impact, sans-serif;
+      font-size:1.6rem;
+      font-weight:400;
+      letter-spacing:.03em;
       line-height:1;
-      margin-bottom:8px;
     }
 
     .proof-item span{
-      color:#e9e9e9;
+      display:block;
+      margin-top:8px;
+      color:#f4ded0;
       font-size:.82rem;
+      font-weight:750;
       line-height:1.35;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.6px;
     }
 
     .hero-visual{
-      position:relative;
       min-height:560px;
+      position:relative;
       display:grid;
       place-items:center;
     }
@@ -360,544 +428,737 @@
     .hero-visual::before{
       content:"";
       position:absolute;
-      width:72%;
+      width:92%;
       aspect-ratio:1;
       border-radius:50%;
-      background:radial-gradient(circle, rgba(255,230,0,.28), transparent 66%);
-      filter:blur(10px);
-      transform:translate(14%, -4%);
+      background:radial-gradient(circle, rgba(255,122,24,.42), transparent 62%);
+      filter:blur(8px);
+      animation:pulse 4.8s ease-in-out infinite;
     }
 
-    .hero-product{
+    .menu-poster{
       position:relative;
-      width:min(520px, 100%);
-      aspect-ratio:1;
-      border-radius:50%;
-      padding:18px;
+      width:min(440px, 92vw);
+      min-height:520px;
+      border:1px solid rgba(255,122,24,.4);
+      border-radius:14px;
+      overflow:hidden;
       background:
-        linear-gradient(145deg, rgba(255,230,0,.85), rgba(255,94,0,.22) 42%, rgba(255,255,255,.08) 68%),
-        rgba(0,0,0,.42);
-      box-shadow:0 36px 90px rgba(0,0,0,.56);
+        linear-gradient(180deg, #050505 0 40%, #111 100%),
+        var(--black);
+      box-shadow:var(--shadow-strong);
+      transform:rotate(2deg);
+      animation:float 5.5s ease-in-out infinite;
     }
 
-    .hero-product img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      border-radius:50%;
-      border:1px solid rgba(255,255,255,.18);
-      filter:saturate(1.12) contrast(1.04);
+    .poster-stripe{
+      height:118px;
+      position:relative;
+      background:var(--orange);
+      clip-path:polygon(0 0, 100% 0, 100% 72%, 82% 62%, 58% 88%, 33% 66%, 0 78%);
     }
 
-    .hero-product::after{
+    .poster-stripe::before{
       content:"";
       position:absolute;
-      inset:18px;
-      border-radius:50%;
-      box-shadow:inset 0 -80px 90px rgba(0,0,0,.48);
-      pointer-events:none;
+      inset:0;
+      background:
+        linear-gradient(8deg, transparent 0 13%, #050505 13% 20%, transparent 20% 32%, #050505 32% 39%, transparent 39% 62%, #050505 62% 72%, transparent 72%),
+        linear-gradient(170deg, transparent 0 50%, rgba(0,0,0,.7) 50% 56%, transparent 56%);
+      opacity:.9;
     }
 
-    .brand-seal{
-      position:absolute;
-      top:26px;
-      left:0;
-      width:122px;
-      height:122px;
-      border-radius:50%;
+    .poster-title{
+      position:relative;
+      z-index:1;
+      padding:28px 32px;
+      font-family:"Anton", Impact, sans-serif;
+      color:#fff;
+      font-size:3.7rem;
+      line-height:.9;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      text-shadow:0 8px 0 rgba(0,0,0,.22);
+    }
+
+    .poster-body{
       display:grid;
       place-items:center;
-      background:#080808;
-      border:2px solid var(--yellow);
-      box-shadow:0 20px 52px rgba(0,0,0,.42), 0 0 34px rgba(255,230,0,.18);
+      padding:34px 28px 26px;
     }
 
-    .brand-seal .logo-house{
-      width:70%;
-      height:66%;
-      font-size:13px;
-      color:#111;
+    .poster-logo{
+      width:246px;
+      height:246px;
     }
 
-    .floating-card{
-      position:absolute;
-      right:0;
-      bottom:62px;
-      width:min(260px, 70%);
+    .poster-logo::before{
+      top:34px;
+      font-size:46px;
+    }
+
+    .poster-logo::after{
+      bottom:31px;
+      font-size:42px;
+    }
+
+    .poster-logo .burger-mark{
+      width:100px;
+      height:78px;
+      margin-top:10px;
+      border-radius:48px 48px 25px 25px;
+    }
+
+    .poster-logo .burger-mark::before,
+    .poster-logo .burger-mark::after{
+      top:24px;
+      width:15px;
+      height:15px;
+    }
+
+    .poster-logo .burger-mark::before{ left:28px; }
+    .poster-logo .burger-mark::after{ right:28px; }
+
+    .poster-note{
+      width:100%;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:14px;
+      align-items:center;
+      margin-top:30px;
       padding:18px;
-      background:rgba(10,10,10,.76);
-      border:1px solid rgba(255,255,255,.14);
-      backdrop-filter:blur(18px);
-      box-shadow:0 24px 60px rgba(0,0,0,.42);
+      border-radius:8px;
+      color:#fff3e4;
+      background:linear-gradient(135deg, rgba(239,28,36,.26), rgba(255,122,24,.16));
+      border:1px solid rgba(255,122,24,.28);
     }
 
-    .floating-card small{
+    .poster-note strong{
       display:block;
-      color:var(--yellow);
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:1.4px;
-      margin-bottom:8px;
-    }
-
-    .floating-card strong{
-      display:block;
-      font-size:1.35rem;
-      line-height:1.05;
-      margin-bottom:8px;
+      font-size:1rem;
       text-transform:uppercase;
     }
 
-    .floating-card span{
-      color:#d7d7d7;
-      line-height:1.45;
-      font-size:.93rem;
+    .poster-note span{
+      display:block;
+      margin-top:5px;
+      color:#f8cdb4;
+      font-size:.86rem;
     }
 
-    /* SECTIONS */
-    section{
-      padding:88px 0;
+    .poster-price{
+      font-family:"Anton", Impact, sans-serif;
+      color:var(--orange);
+      font-size:2rem;
+      white-space:nowrap;
+    }
+
+    .section{
+      padding:82px 0;
     }
 
     .section-title{
       display:flex;
-      align-items:flex-end;
       justify-content:space-between;
-      gap:20px;
+      align-items:end;
+      gap:24px;
       margin-bottom:30px;
     }
 
-    .section-title h2{
-      font-size:clamp(2rem, 5vw, 3.8rem);
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color:var(--red);
+      font-size:.78rem;
+      font-weight:950;
+      letter-spacing:.16em;
       text-transform:uppercase;
+    }
+
+    .eyebrow::before{
+      content:"";
+      width:34px;
+      height:3px;
+      background:linear-gradient(90deg, var(--red), var(--orange));
+    }
+
+    .section-title h2{
+      margin-top:10px;
+      color:var(--black);
+      font-family:"Anton", Impact, sans-serif;
+      font-size:clamp(2.3rem, 5vw, 4.2rem);
+      font-weight:400;
       line-height:.95;
-      letter-spacing:-1px;
+      text-transform:uppercase;
     }
 
     .section-title h2 span{
-      color:var(--yellow);
+      color:var(--orange);
     }
 
     .section-title p{
+      max-width:470px;
       color:var(--muted);
-      max-width:450px;
-      line-height:1.7;
+      line-height:1.65;
+      font-weight:600;
     }
 
-    /* Destaques */
     .featured{
-      background:
-        radial-gradient(circle at top right, rgba(255,230,0,.14), transparent 30%),
-        var(--bg);
+      position:relative;
+      z-index:2;
+      margin-top:-44px;
+    }
+
+    .featured-shell{
+      padding:30px;
+      border-radius:14px;
+      background:#fff;
+      box-shadow:var(--shadow);
+      border:1px solid var(--line);
     }
 
     .featured-grid{
       display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:24px;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:16px;
     }
 
     .featured-card{
-      background:linear-gradient(180deg, #1a1a1a, #0d0d0d);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:24px;
+      position:relative;
+      min-height:285px;
+      display:flex;
+      flex-direction:column;
       overflow:hidden;
-      box-shadow:var(--shadow);
-      transition:.25s ease;
-    }
-
-    .featured-card:hover{
-      transform:translateY(-5px);
+      border-radius:8px;
+      background:#121212;
+      color:#fff;
+      box-shadow:0 12px 24px rgba(0,0,0,.16);
+      isolation:isolate;
     }
 
     .featured-card img{
       width:100%;
-      height:220px;
+      height:168px;
       object-fit:cover;
+      transition:transform .45s ease;
+    }
+
+    .featured-card:hover img{
+      transform:scale(1.08);
     }
 
     .featured-body{
-      padding:22px;
+      display:flex;
+      flex:1;
+      flex-direction:column;
+      padding:15px;
+      background:linear-gradient(180deg, #171717, #080808);
     }
 
     .featured-body h3{
-      font-size:1.3rem;
+      font-size:1rem;
+      line-height:1.18;
       margin-bottom:8px;
-      text-transform:uppercase;
     }
 
     .featured-body p{
-      color:#d7d7d7;
-      line-height:1.55;
-      margin-bottom:16px;
-      min-height:72px;
+      color:#ccbdb2;
+      font-size:.8rem;
+      line-height:1.45;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
     }
 
     .price-row{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:14px;
+      gap:12px;
+      margin-top:auto;
+      padding-top:14px;
     }
 
     .price{
-      color:var(--yellow);
-      font-size:1.35rem;
-      font-weight:900;
+      color:var(--orange);
+      font-weight:950;
+      white-space:nowrap;
     }
 
-    /* Cardápio */
-    .menu-wrap{
-      background:#f7f7f7;
-      color:#111;
-      border-radius:42px 42px 0 0;
-      margin-top:-24px;
+    .add-btn{
+      width:38px;
+      height:38px;
+      flex:0 0 38px;
+      border:0;
+      border-radius:50%;
+      color:#180a02;
+      background:var(--orange);
+      cursor:pointer;
+      font-weight:950;
+      font-size:1.3rem;
+      transition:.2s ease;
+    }
+
+    .add-btn:hover{
+      transform:rotate(90deg) scale(1.06);
+      background:#ffd24d;
+    }
+
+    .promo-band{
       position:relative;
-      z-index:5;
+      color:#fff;
+      background:
+        linear-gradient(90deg, rgba(6,6,6,.97), rgba(6,6,6,.76)),
+        url("https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1800&q=88") center/cover;
+      overflow:hidden;
     }
 
-    .menu-wrap .section-title h2{
-      color:#111;
+    .promo-band::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(100deg, transparent 0 55%, rgba(255,122,24,.22) 55% 100%);
     }
 
-    .menu-wrap .section-title p{
-      color:#555;
+    .promo-grid{
+      position:relative;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .promo-card{
+      display:grid;
+      grid-template-columns:1fr 118px;
+      min-height:130px;
+      gap:18px;
+      align-items:center;
+      padding:18px;
+      border:1px solid rgba(255,255,255,.13);
+      border-radius:8px;
+      background:rgba(255,255,255,.06);
+      backdrop-filter:blur(8px);
+    }
+
+    .promo-card h3{
+      font-size:1rem;
+      margin-bottom:6px;
+    }
+
+    .promo-card p{
+      color:#f1d9c8;
+      font-size:.86rem;
+      line-height:1.45;
+      margin-bottom:10px;
+    }
+
+    .promo-card img{
+      width:118px;
+      height:92px;
+      object-fit:cover;
+      border-radius:8px;
+    }
+
+    .menu-wrap{
+      background:var(--paper);
+      padding:86px 0;
     }
 
     .menu-controls{
       position:sticky;
-      top:90px;
-      z-index:40;
-      background:#fff;
-      border:1px solid #e8e8e8;
-      border-radius:22px;
-      padding:16px;
-      display:flex;
-      align-items:center;
+      top:92px;
+      z-index:30;
+      display:grid;
+      grid-template-columns:minmax(240px, 360px) 1fr;
       gap:14px;
-      flex-wrap:wrap;
-      box-shadow:0 14px 32px rgba(0,0,0,.08);
+      align-items:center;
       margin-bottom:34px;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:rgba(255,255,255,.9);
+      box-shadow:0 12px 30px rgba(0,0,0,.06);
+      backdrop-filter:blur(16px);
     }
 
     .search-input{
-      flex:1;
-      min-width:240px;
-      border:1px solid #e4e4e4;
-      background:#fafafa;
-      border-radius:14px;
-      padding:15px 18px;
+      width:100%;
+      height:48px;
+      border:1px solid var(--line);
+      border-radius:8px;
       outline:none;
-      font-size:15px;
+      color:var(--text);
+      background:#fff;
+      padding:0 15px;
+      font-weight:800;
     }
 
     .search-input:focus{
-      border-color:#222;
-      box-shadow:0 0 0 4px rgba(255,230,0,.18);
+      border-color:var(--orange);
+      box-shadow:0 0 0 4px rgba(255,122,24,.13);
     }
 
     .category-filters{
       display:flex;
-      gap:10px;
-      overflow-x:auto;
-      padding-bottom:4px;
-      max-width:100%;
+      gap:9px;
+      overflow:auto;
+      padding-bottom:2px;
+      scrollbar-width:thin;
     }
 
     .cat-btn{
-      border:none;
-      background:#f2f2f2;
-      color:#111;
-      padding:12px 16px;
+      min-height:40px;
+      flex:0 0 auto;
+      border:1px solid var(--line);
       border-radius:999px;
+      color:#332216;
+      background:#fff;
+      padding:0 16px;
       cursor:pointer;
-      font-weight:800;
+      font-size:.78rem;
+      font-weight:950;
       white-space:nowrap;
       transition:.2s ease;
     }
 
-    .cat-btn.active,
-    .cat-btn:hover{
+    .cat-btn:hover,
+    .cat-btn.active{
+      border-color:#111;
+      color:#fff;
       background:#111;
-      color:var(--yellow);
     }
 
     .menu-category{
+      scroll-margin-top:160px;
       margin-bottom:42px;
     }
 
     .menu-category h3{
-      font-size:1.7rem;
-      text-transform:uppercase;
-      margin-bottom:18px;
       display:flex;
       align-items:center;
-      gap:12px;
+      gap:10px;
+      margin-bottom:16px;
       color:#111;
+      font-family:"Anton", Impact, sans-serif;
+      font-size:2rem;
+      font-weight:400;
+      letter-spacing:.02em;
+      text-transform:uppercase;
     }
 
     .menu-category h3::before{
       content:"";
-      width:8px;
-      height:30px;
+      width:10px;
+      height:34px;
       border-radius:999px;
-      background:var(--yellow);
+      background:linear-gradient(180deg, var(--red), var(--orange));
     }
 
     .products-grid{
       display:grid;
-      grid-template-columns:repeat(2, 1fr);
-      gap:18px;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:14px;
     }
 
     .product-card{
-      background:#fff;
-      border:1px solid #e6e6e6;
-      border-radius:18px;
-      overflow:hidden;
       display:grid;
-      grid-template-columns:1fr 130px;
+      grid-template-columns:1fr 126px;
+      gap:16px;
+      min-height:132px;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#fff;
+      box-shadow:0 10px 24px rgba(0,0,0,.045);
       transition:.22s ease;
-      min-height:156px;
     }
 
     .product-card:hover{
       transform:translateY(-3px);
-      box-shadow:0 14px 32px rgba(0,0,0,.10);
       border-color:#111;
+      box-shadow:0 16px 32px rgba(0,0,0,.1);
     }
 
     .product-info{
-      padding:18px;
+      min-width:0;
       display:flex;
       flex-direction:column;
     }
 
     .product-info h4{
-      font-size:1.08rem;
-      margin-bottom:8px;
-      color:#18202f;
+      margin-bottom:6px;
+      color:#17110e;
+      font-size:.96rem;
+      line-height:1.25;
     }
 
     .product-info p{
-      color:#636363;
+      color:var(--muted);
+      font-size:.8rem;
       line-height:1.45;
-      font-size:.93rem;
-      margin-bottom:14px;
       display:-webkit-box;
-      -webkit-line-clamp:3;
+      -webkit-line-clamp:2;
       -webkit-box-orient:vertical;
       overflow:hidden;
     }
 
     .product-bottom{
-      margin-top:auto;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
+      margin-top:auto;
+      padding-top:11px;
     }
 
     .product-price{
       color:#111;
-      font-weight:900;
-      font-size:1.12rem;
+      font-weight:950;
+      white-space:nowrap;
     }
 
-    .add-btn{
-      width:40px;
-      height:40px;
-      border-radius:50%;
-      border:none;
-      background:var(--yellow);
-      color:#111;
-      font-size:24px;
-      font-weight:900;
-      cursor:pointer;
-      transition:.2s ease;
-      flex-shrink:0;
+    .old-price{
+      margin-left:6px;
+      color:#9c8f86;
+      font-size:.76rem;
+      font-weight:800;
+      text-decoration:line-through;
     }
 
-    .add-btn:hover{
-      background:#111;
-      color:var(--yellow);
-      transform:rotate(90deg);
+    .discount{
+      margin-left:6px;
+      border-radius:4px;
+      color:#fff;
+      background:var(--orange);
+      padding:2px 5px;
+      font-size:.65rem;
+      font-weight:950;
+    }
+
+    .sold-out{
+      display:inline-flex;
+      min-height:31px;
+      align-items:center;
+      border-radius:6px;
+      color:#fff;
+      background:#191919;
+      padding:0 10px;
+      font-size:.74rem;
+      font-weight:950;
+      text-transform:uppercase;
     }
 
     .product-card img{
-      width:100%;
-      height:100%;
+      width:126px;
+      height:104px;
+      align-self:center;
+      border-radius:8px;
       object-fit:cover;
-      background:#ececec;
+      background:#f3f3f3;
     }
 
-    /* Sobre */
     .about{
-      background:
-        linear-gradient(rgba(0,0,0,.84), rgba(0,0,0,.9)),
-        url("https://images.unsplash.com/photo-1561758033-d89a9ad46330?auto=format&fit=crop&w=1600&q=90") center/cover no-repeat;
+      color:#fff;
+      background:#0a0a0a;
+      padding:82px 0;
+      overflow:hidden;
     }
 
     .about-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:30px;
+      gap:42px;
       align-items:center;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.1);
-      border-radius:28px;
-      padding:34px;
-      backdrop-filter:blur(10px);
     }
 
     .about h2{
-      font-size:clamp(2rem, 5vw, 3.8rem);
+      font-family:"Anton", Impact, sans-serif;
+      font-size:clamp(2.4rem, 5vw, 4.4rem);
+      font-weight:400;
+      line-height:.98;
       text-transform:uppercase;
-      line-height:.95;
       margin-bottom:18px;
     }
 
     .about h2 span{
-      color:var(--yellow);
+      color:var(--orange);
     }
 
     .about p{
-      color:#ddd;
+      max-width:560px;
+      color:#dac8ba;
       line-height:1.75;
-      margin-bottom:16px;
+      margin-bottom:15px;
     }
 
     .about-list{
       display:grid;
-      gap:14px;
+      gap:13px;
     }
 
     .about-item{
-      background:rgba(0,0,0,.26);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:16px;
-      padding:15px 16px;
-      color:#f4f4f4;
-      font-weight:700;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:18px;
+      border:1px solid rgba(255,122,24,.18);
+      border-radius:8px;
+      background:rgba(255,255,255,.045);
     }
 
-    /* Footer */
+    .about-item::before{
+      content:"";
+      width:12px;
+      height:12px;
+      flex:0 0 12px;
+      margin-top:5px;
+      border-radius:50%;
+      background:var(--orange);
+      box-shadow:0 0 0 6px rgba(255,122,24,.14);
+    }
+
     footer{
+      color:#c9b6a8;
       background:#050505;
-      border-top:1px solid rgba(255,255,255,.08);
-      padding:36px 0;
+      padding:32px 0;
+      border-top:1px solid rgba(255,122,24,.15);
       text-align:center;
-      color:#bcbcbc;
+      font-size:.9rem;
+      line-height:1.7;
     }
 
     footer strong{
-      color:#fff;
+      color:var(--orange);
+      font-family:"Anton", Impact, sans-serif;
+      font-size:1.6rem;
+      font-weight:400;
+      letter-spacing:.04em;
+      text-transform:uppercase;
     }
 
-    /* Carrinho */
     .cart-fab{
       position:fixed;
       right:22px;
       bottom:22px;
-      width:70px;
-      height:70px;
-      border:none;
+      z-index:60;
+      width:62px;
+      height:62px;
+      border:0;
       border-radius:50%;
-      background:var(--yellow);
-      color:#111;
+      color:#140a04;
+      background:linear-gradient(135deg, var(--orange), #ffd24d);
+      box-shadow:0 18px 45px rgba(0,0,0,.28);
       cursor:pointer;
-      font-size:30px;
-      z-index:1002;
-      box-shadow:0 16px 36px rgba(255,230,0,.3);
+      font-size:1.45rem;
+      font-weight:950;
+      transition:.2s ease;
+    }
+
+    .cart-fab:hover{
+      transform:translateY(-3px) scale(1.03);
     }
 
     .cart-count{
       position:absolute;
-      top:-4px;
-      right:-4px;
-      width:28px;
-      height:28px;
-      border-radius:50%;
-      background:var(--danger);
-      color:#fff;
+      top:-5px;
+      right:-5px;
+      min-width:24px;
+      height:24px;
       display:grid;
       place-items:center;
-      font-size:13px;
-      font-weight:900;
+      border:2px solid #fff;
+      border-radius:50%;
+      color:#fff;
+      background:var(--red);
+      font-size:.72rem;
+      font-weight:950;
     }
 
     .overlay{
       position:fixed;
       inset:0;
-      background:rgba(0,0,0,.6);
-      z-index:1003;
-      display:none;
+      z-index:70;
+      visibility:hidden;
+      opacity:0;
+      background:rgba(0,0,0,.58);
+      backdrop-filter:blur(4px);
+      transition:.25s ease;
     }
 
     .overlay.show{
-      display:block;
+      visibility:visible;
+      opacity:1;
     }
 
     .cart-panel{
       position:fixed;
       top:0;
-      right:-420px;
-      width:min(400px, 92%);
+      right:0;
+      z-index:80;
+      width:min(430px, 100%);
       height:100vh;
-      background:#fff;
-      color:#111;
-      z-index:1004;
-      box-shadow:-20px 0 50px rgba(0,0,0,.36);
       display:flex;
       flex-direction:column;
-      transition:.28s ease;
+      color:#111;
+      background:#fff;
+      box-shadow:-30px 0 70px rgba(0,0,0,.24);
+      transform:translateX(105%);
+      transition:.3s ease;
     }
 
     .cart-panel.open{
-      right:0;
+      transform:translateX(0);
     }
 
     .cart-header{
-      background:#111;
-      color:#fff;
-      padding:20px;
       display:flex;
       align-items:center;
       justify-content:space-between;
+      padding:22px;
+      color:#fff;
+      background:#0b0b0b;
+      border-bottom:4px solid var(--orange);
     }
 
     .cart-header h3{
+      font-family:"Anton", Impact, sans-serif;
+      font-size:2rem;
+      font-weight:400;
       text-transform:uppercase;
-      font-size:1.1rem;
     }
 
     .close-btn{
-      border:none;
-      background:transparent;
+      width:42px;
+      height:42px;
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:50%;
       color:#fff;
-      font-size:28px;
+      background:rgba(255,255,255,.06);
       cursor:pointer;
+      font-size:1.4rem;
     }
 
     .cart-items{
       flex:1;
-      overflow-y:auto;
+      overflow:auto;
       padding:18px;
-      display:grid;
-      gap:12px;
-      align-content:start;
+      background:#f8f5ef;
     }
 
     .cart-item{
-      border:1px solid #ececec;
-      border-radius:16px;
+      margin-bottom:12px;
       padding:14px;
-      display:grid;
-      gap:10px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#fff;
     }
 
     .cart-item strong{
-      font-size:.95rem;
+      display:block;
+      margin-bottom:10px;
+      line-height:1.25;
     }
 
     .cart-line{
@@ -905,389 +1166,415 @@
       align-items:center;
       justify-content:space-between;
       gap:12px;
+      color:var(--muted);
+      font-size:.9rem;
+      font-weight:800;
     }
 
     .qty{
       display:flex;
       align-items:center;
-      gap:8px;
+      gap:10px;
+      color:#111;
     }
 
     .qty button{
-      width:28px;
-      height:28px;
-      border:none;
+      width:30px;
+      height:30px;
+      border:0;
       border-radius:50%;
-      background:#111;
-      color:var(--yellow);
-      font-weight:900;
+      color:#111;
+      background:#f1e7dc;
       cursor:pointer;
+      font-weight:950;
     }
 
     .cart-footer{
-      border-top:1px solid #ececec;
       padding:18px;
-      display:grid;
-      gap:12px;
+      border-top:1px solid var(--line);
+      background:#fff;
     }
 
     .cart-total{
       display:flex;
       justify-content:space-between;
       align-items:center;
-      font-size:1.18rem;
-      font-weight:900;
+      margin-bottom:14px;
+      color:#111;
+      font-size:1.16rem;
+      font-weight:950;
     }
 
     .whats-btn{
-      border:none;
-      background:var(--green);
+      width:100%;
+      min-height:54px;
+      border:0;
+      border-radius:8px;
       color:#fff;
-      padding:16px;
-      border-radius:14px;
-      font-weight:900;
-      text-transform:uppercase;
+      background:var(--green);
       cursor:pointer;
+      font-weight:950;
+      letter-spacing:.05em;
+      text-transform:uppercase;
     }
 
-    /* Responsive */
-    @media (max-width: 980px){
-      .hero-grid,
-      .about-grid,
-      .featured-grid,
-      .products-grid{
-        grid-template-columns:1fr;
-      }
+    .empty-state{
+      padding:26px 14px;
+      color:#64564d;
+      text-align:center;
+      line-height:1.5;
+      font-weight:700;
+    }
 
+    @keyframes pulse{
+      0%, 100%{ opacity:.65; transform:scale(.95); }
+      50%{ opacity:1; transform:scale(1.05); }
+    }
+
+    @keyframes float{
+      0%, 100%{ transform:rotate(2deg) translateY(0); }
+      50%{ transform:rotate(-1deg) translateY(-12px); }
+    }
+
+    @media (max-width:980px){
       .nav-links{
         display:none;
       }
 
+      .hero-grid,
+      .about-grid{
+        grid-template-columns:1fr;
+      }
+
       .hero{
-        min-height:auto;
-        padding:118px 0 80px;
-        background-position:center;
-      }
-
-      .hero-grid{
-        gap:42px;
-      }
-
-      .hero-copy{
-        max-width:760px;
+        padding-top:132px;
       }
 
       .hero-visual{
-        min-height:440px;
+        min-height:500px;
+        order:-1;
       }
 
-      .hero-product{
-        width:min(440px, 82vw);
-      }
-
-      .brand-seal{
-        left:8%;
-        top:12px;
-      }
-
-      .floating-card{
-        right:7%;
-        bottom:24px;
+      .hero-proof,
+      .featured-grid,
+      .products-grid{
+        grid-template-columns:repeat(2, minmax(0, 1fr));
       }
 
       .menu-controls{
-        top:82px;
+        grid-template-columns:1fr;
       }
     }
 
-    @media (max-width: 640px){
+    @media (max-width:680px){
+      .top-strip{
+        font-size:.65rem;
+        line-height:1.35;
+      }
+
+      header{
+        top:36px;
+      }
+
+      header.scrolled{
+        top:36px;
+      }
+
       .nav{
-        min-height:72px;
-        gap:12px;
+        min-height:70px;
       }
 
-      .brand{
-        gap:8px;
+      .brand-title strong{
+        font-size:1.18rem;
       }
 
-      .logo-mark-small{
-        width:46px;
-        height:46px;
+      .brand-title span{
+        display:none;
       }
 
-      .logo-mark-small .logo-house{
-        font-size:6px;
+      .mega-logo{
+        width:50px;
+        height:50px;
       }
 
-      .brand strong{
-        font-size:.92rem;
-      }
-
-      .nav .btn-primary{
-        padding:12px 15px;
-        font-size:.78rem;
+      .nav .btn{
+        min-height:40px;
+        padding:0 14px;
+        font-size:.72rem;
       }
 
       .hero{
-        padding:104px 0 64px;
+        min-height:auto;
+        padding:126px 0 62px;
+      }
+
+      .hero::before{
+        top:86px;
+        height:84px;
       }
 
       .hero h1{
-        font-size:clamp(2.85rem, 15vw, 4.25rem);
-        margin-bottom:18px;
+        font-size:clamp(3rem, 17vw, 4.9rem);
       }
 
       .hero p{
-        font-size:1rem;
-        line-height:1.65;
-      }
-
-      .tag{
-        font-size:.68rem;
-        letter-spacing:1.1px;
-        padding:10px 14px;
+        font-size:.98rem;
       }
 
       .hero-actions{
         display:grid;
-        grid-template-columns:1fr;
       }
 
       .hero-actions .btn{
         width:100%;
-        min-height:52px;
       }
 
-      .hero-proof{
+      .hero-proof,
+      .featured-grid,
+      .promo-grid,
+      .products-grid{
         grid-template-columns:1fr;
       }
 
-      .proof-item{
-        min-height:auto;
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        gap:16px;
-      }
-
-      .proof-item strong{
-        margin:0;
-      }
-
-      .proof-item span{
-        text-align:right;
-      }
-
       .hero-visual{
-        min-height:360px;
+        min-height:420px;
       }
 
-      .hero-product{
-        width:min(330px, 86vw);
-        padding:12px;
+      .menu-poster{
+        width:min(330px, 92vw);
+        min-height:410px;
       }
 
-      .brand-seal{
-        width:86px;
-        height:86px;
-        left:0;
-        top:18px;
+      .poster-title{
+        font-size:2.7rem;
+        padding:24px;
       }
 
-      .brand-seal .logo-house{
-        font-size:9px;
+      .poster-logo{
+        width:186px;
+        height:186px;
       }
 
-      .floating-card{
-        width:min(230px, 76vw);
-        right:0;
-        bottom:4px;
-        padding:14px;
-      }
+      .poster-logo::before{ top:26px; font-size:35px; }
+      .poster-logo::after{ bottom:24px; font-size:31px; }
+      .poster-logo .burger-mark{ width:76px; height:60px; }
 
-      .floating-card strong{
-        font-size:1.08rem;
-      }
-
-      .floating-card span{
-        font-size:.84rem;
+      .section{
+        padding:62px 0;
       }
 
       .section-title{
-        flex-direction:column;
-        align-items:flex-start;
+        display:block;
       }
 
+      .section-title p{
+        margin-top:12px;
+      }
+
+      .featured-shell{
+        padding:18px;
+      }
+
+      .promo-card,
       .product-card{
         grid-template-columns:1fr;
       }
 
+      .promo-card img,
       .product-card img{
+        width:100%;
         height:180px;
         order:-1;
       }
 
-      .about-grid{
-        padding:24px;
+      .menu-wrap{
+        padding:62px 0;
+      }
+
+      .menu-controls{
+        top:76px;
+        margin-left:-4px;
+        margin-right:-4px;
       }
     }
   </style>
 </head>
 <body>
+  <div class="top-strip">Aberto ate 23h30 - Pedido minimo R$ 15,00 - Mega Lanches</div>
 
-  <header>
+  <header id="siteHeader">
     <div class="container nav">
-      <a href="#inicio" class="brand">
-        <span class="logo-mark logo-mark-small" aria-hidden="true">
-          <span class="logo-house">Casa<br>do<br>Lanche</span>
+      <a href="#inicio" class="brand" aria-label="Mega Lanches">
+        <span class="mega-logo" aria-hidden="true"><span class="burger-mark"></span></span>
+        <span class="brand-title">
+          <strong>Mega Lanches</strong>
+          <span>Cardapio digital</span>
         </span>
-        <strong>Casa do <span>Lanche</span></strong>
       </a>
 
-      <nav class="nav-links">
-        <a href="#inicio">Início</a>
-        <a href="#destaques">Destaques</a>
-        <a href="#cardapio">Cardápio</a>
-        <a href="#sobre">Sobre</a>
+      <nav class="nav-links" aria-label="Navegacao principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#mais-pedidos">Mais pedidos</a>
+        <a href="#promocoes">Promocoes</a>
+        <a href="#cardapio">Cardapio</a>
+        <a href="#sobre">Loja</a>
       </nav>
 
-      <a href="#cardapio" class="btn btn-primary">Pedir Agora</a>
+      <a class="btn" href="#cardapio">Pedir agora</a>
     </div>
   </header>
 
-  <section class="hero" id="inicio">
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <div class="tag">Lanches, pastéis e porções</div>
-        <h1>Sabor de verdade em cada pedido</h1>
-        <div class="hero-line"></div>
-        <p>
-          A Casa do Lanche reúne hambúrgueres, pastéis, porções, combos e bebidas
-          em um cardápio direto, apetitoso e pronto para pedir em poucos toques.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#cardapio" class="btn btn-primary">Pedir Agora</a>
-          <button class="btn btn-outline" onclick="openCart()">Monte seu Pedido</button>
-        </div>
-
-        <div class="hero-proof" aria-label="Destaques da Casa do Lanche">
-          <div class="proof-item">
-            <strong>+40</strong>
-            <span>opções no cardápio</span>
-          </div>
-          <div class="proof-item">
-            <strong>Online</strong>
-            <span>pedido direto no WhatsApp</span>
-          </div>
-          <div class="proof-item">
-            <strong>Combo</strong>
-            <span>lanches, porções e bebidas</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-visual" aria-label="Lanche em destaque da Casa do Lanche">
-        <div class="hero-product">
-          <img
-            src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=92"
-            alt="Hambúrguer artesanal com queijo derretido"
-          >
-        </div>
-
-        <div class="brand-seal" aria-hidden="true">
-          <span class="logo-house">Casa<br>do<br>Lanche</span>
-        </div>
-
-        <div class="floating-card">
-          <small>Mais pedido</small>
-          <strong>X-Tudo da Casa</strong>
-          <span>Carne, bacon, ovo, queijo, salada e aquele capricho que sustenta.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="featured" id="destaques">
-    <div class="container">
-      <div class="section-title">
-        <h2>Mais <span>Pedidos</span></h2>
-        <p>
-          Os itens mais procurados do cardápio para já chamar a atenção logo de cara.
-        </p>
-      </div>
-
-      <div class="featured-grid" id="featuredGrid"></div>
-    </div>
-  </section>
-
-  <section class="menu-wrap" id="cardapio">
-    <div class="container" style="padding:90px 0;">
-      <div class="section-title">
-        <h2>Nosso <span>Cardápio</span></h2>
-        <p>
-          Explore as categorias, filtre por tipo de produto e envie seu pedido com rapidez.
-        </p>
-      </div>
-
-      <div class="menu-controls">
-        <input
-          type="text"
-          class="search-input"
-          id="searchInput"
-          placeholder="Buscar item no cardápio..."
-        />
-        <div class="category-filters" id="categoryFilters"></div>
-      </div>
-
-      <div id="menuContainer"></div>
-    </div>
-  </section>
-
-  <section class="about" id="sobre">
-    <div class="container">
-      <div class="about-grid">
-        <div>
-          <h2>Sabor que <span>Chama Atenção</span></h2>
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="tag">Lanches, pizzas, acai e porcoes</div>
+          <h1>Cardapio <span>Mega Lanches</span></h1>
           <p>
-            A Casa do Lanche reúne lanches, porções, pastéis, combos e bebidas em
-            um cardápio visual moderno, pensado para aumentar conversão e facilitar o pedido.
+            Um cardapio digital moderno para apresentar as promocoes do dia, pizzas,
+            hamburgueres, combos, acai, sucos e bebidas com pedido direto pelo WhatsApp.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn" href="#cardapio">Ver cardapio</a>
+            <button class="btn btn-outline" type="button" onclick="openCart()">Montar pedido</button>
+          </div>
+
+          <div class="hero-proof" aria-label="Informacoes da loja">
+            <div class="proof-item">
+              <strong>23h30</strong>
+              <span>atendimento aberto ate a noite</span>
+            </div>
+            <div class="proof-item">
+              <strong>R$15</strong>
+              <span>pedido minimo informado no cardapio</span>
+            </div>
+            <div class="proof-item">
+              <strong>+60</strong>
+              <span>opcoes entre lanches, pizzas e bebidas</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="Arte de cardapio Mega Lanches">
+          <div class="menu-poster">
+            <div class="poster-stripe">
+              <div class="poster-title">Cardapio</div>
+            </div>
+            <div class="poster-body">
+              <div class="mega-logo poster-logo" aria-hidden="true">
+                <span class="burger-mark"></span>
+              </div>
+              <div class="poster-note">
+                <div>
+                  <strong>Promocao familia</strong>
+                  <span>4 X-tudo e 1 Guarana Kuat 2L</span>
+                </div>
+                <div class="poster-price">R$54,99</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured" id="mais-pedidos">
+      <div class="container featured-shell reveal">
+        <div class="section-title">
+          <div>
+            <div class="eyebrow">Destaques</div>
+            <h2>Os mais <span>pedidos</span></h2>
+          </div>
+          <p>Itens que aparecem no topo do cardapio do print, prontos para chamar atencao do cliente.</p>
+        </div>
+
+        <div class="featured-grid" id="featuredGrid"></div>
+      </div>
+    </section>
+
+    <section class="section promo-band" id="promocoes">
+      <div class="container">
+        <div class="section-title reveal">
+          <div>
+            <div class="eyebrow">Ofertas</div>
+            <h2 style="color:#fff;">Promocao <span>do dia</span></h2>
+          </div>
+          <p style="color:#f0d9c8;">Combos e ofertas em destaque, com visual forte para vender rapido pelo WhatsApp.</p>
+        </div>
+
+        <div class="promo-grid reveal" id="promoGrid"></div>
+      </div>
+    </section>
+
+    <section class="menu-wrap" id="cardapio">
+      <div class="container">
+        <div class="section-title reveal">
+          <div>
+            <div class="eyebrow">Completo</div>
+            <h2>Nosso <span>cardapio</span></h2>
+          </div>
+          <p>Busque por produto, filtre por categoria e adicione itens ao pedido do cliente.</p>
+        </div>
+
+        <div class="menu-controls">
+          <input
+            class="search-input"
+            id="searchInput"
+            type="text"
+            placeholder="Buscar item no cardapio..."
+            autocomplete="off"
+          />
+          <div class="category-filters" id="categoryFilters" aria-label="Filtros de categoria"></div>
+        </div>
+
+        <div id="menuContainer"></div>
+      </div>
+    </section>
+
+    <section class="about" id="sobre">
+      <div class="container about-grid">
+        <div class="reveal">
+          <h2>Perfil da <span>loja</span></h2>
+          <p>
+            A Mega Lanches aparece com identidade forte em preto, laranja e vermelho,
+            cardapio amplo e foco em pedido rapido. Este modelo foi montado para
+            apresentar a loja de forma profissional para o cliente.
           </p>
           <p>
-            Ideal para apresentar os produtos de forma profissional e direcionar o cliente
-            direto para o WhatsApp.
+            O numero do WhatsApp esta em uma constante no codigo para trocar pelo
+            contato real antes da entrega final.
           </p>
-          <a href="#cardapio" class="btn btn-primary">Fazer Pedido</a>
+          <a class="btn" href="#cardapio">Fazer pedido</a>
         </div>
 
-        <div class="about-list">
-          <div class="about-item">✅ Visual profissional em preto e amarelo</div>
-          <div class="about-item">✅ Cardápio digital organizado por categorias</div>
-          <div class="about-item">✅ Carrinho com envio direto no WhatsApp</div>
-          <div class="about-item">✅ Destaques fortes para os itens mais vendidos</div>
+        <div class="about-list reveal">
+          <div class="about-item">Cardapio digital organizado por categorias do print.</div>
+          <div class="about-item">Busca, filtros, carrinho e total automatico.</div>
+          <div class="about-item">Mensagem do pedido formatada para WhatsApp.</div>
+          <div class="about-item">Visual animado com vitrine, promocoes e destaques.</div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
     <div class="container">
-      <strong>Casa do Lanche</strong><br>
-      Cardápio Digital © 2026
+      <strong>Mega Lanches</strong><br />
+      Cardapio Digital - 2026
     </div>
   </footer>
 
-  <button class="cart-fab" onclick="openCart()">
-    🛒
+  <button class="cart-fab" type="button" onclick="openCart()" aria-label="Abrir pedido">
+    +
     <span class="cart-count" id="cartCount">0</span>
   </button>
 
   <div class="overlay" id="overlay" onclick="closeCart()"></div>
 
-  <aside class="cart-panel" id="cartPanel">
+  <aside class="cart-panel" id="cartPanel" aria-label="Meu pedido">
     <div class="cart-header">
-      <h3>Meu Pedido</h3>
-      <button class="close-btn" onclick="closeCart()">×</button>
+      <h3>Meu pedido</h3>
+      <button class="close-btn" type="button" onclick="closeCart()" aria-label="Fechar pedido">x</button>
     </div>
 
     <div class="cart-items" id="cartItems"></div>
@@ -1297,7 +1584,7 @@
         <span>Total</span>
         <span id="cartTotal">R$ 0,00</span>
       </div>
-      <button class="whats-btn" onclick="sendOrder()">Enviar pelo WhatsApp</button>
+      <button class="whats-btn" type="button" onclick="sendOrder()">Enviar pelo WhatsApp</button>
     </div>
   </aside>
 
@@ -1305,118 +1592,112 @@
     const NUMERO_WHATSAPP = "5521999999999";
 
     const images = {
-      lanche: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=90",
-      lanche2: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=900&q=90",
-      lanche3: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=900&q=90",
-      hotdog: "https://images.unsplash.com/photo-1612392062798-7f5b7a87e4d1?auto=format&fit=crop&w=900&q=90",
-      batata: "https://images.unsplash.com/photo-1518013431117-eb1465fa5752?auto=format&fit=crop&w=900&q=90",
-      pastel: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=900&q=90",
-      combo: "https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=900&q=90",
-      suco: "https://images.unsplash.com/photo-1622597467836-f3285f2131b8?auto=format&fit=crop&w=900&q=90",
-      bebida: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=900&q=90",
-      salgado: "https://images.unsplash.com/photo-1608039755401-742074f0548d?auto=format&fit=crop&w=900&q=90",
-      frango: "https://images.unsplash.com/photo-1562967916-eb82221dfb36?auto=format&fit=crop&w=900&q=90"
+      xtudo: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=88",
+      burger: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=900&q=88",
+      burger2: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=900&q=88",
+      hotdog: "https://images.unsplash.com/photo-1612392062798-7f5b7a87e4d1?auto=format&fit=crop&w=900&q=88",
+      pizza: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=88",
+      pizza2: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=900&q=88",
+      fries: "https://images.unsplash.com/photo-1518013431117-eb1465fa5752?auto=format&fit=crop&w=900&q=88",
+      combo: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=900&q=88",
+      acai: "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=900&q=88",
+      sundae: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=900&q=88",
+      shake: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=900&q=88",
+      juice: "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&fit=crop&w=900&q=88",
+      drink: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=900&q=88",
+      snack: "https://images.unsplash.com/photo-1608039755401-742074f0548d?auto=format&fit=crop&w=900&q=88",
+      meat: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=88",
+      cod: "https://images.unsplash.com/photo-1562967916-eb82221dfb36?auto=format&fit=crop&w=900&q=88"
     };
 
-    const products = [
-      // Mais pedidos
-      { category: "Mais Pedidos", name: "Misto", desc: "Carne, frango, queijo, mussarela, calabresa, cheddar, catupiry, azeitona e palmito.", price: 18.00, image: images.pastel, featured: true },
-      { category: "Mais Pedidos", name: "Coca-Cola Original 350ml", desc: "Lata 350ml.", price: 6.00, image: images.bebida, featured: true },
-      { category: "Mais Pedidos", name: "X - Tudo", desc: "Pão hambúrguer, bacon, calabresa, ovo, queijo, presunto, alface, tomate e batata palha.", price: 15.00, image: images.lanche2, featured: true },
-      { category: "Mais Pedidos", name: "Suco Pronto Guaracamp Guaraná 285ml", desc: "Embalagem 285ml.", price: 2.50, image: images.suco, featured: false },
-      { category: "Mais Pedidos", name: "Cachorro Quente", desc: "Linguiça ou salsicha, azeitona, batata palha, ovo de codorna, passas, milho e ervilha.", price: 12.00, image: images.hotdog, featured: true },
-      { category: "Mais Pedidos", name: "X - Montanha", desc: "Pão 2 carnes 2 ovos bacon calabresa queijo presunto alface tomate e batata palha.", price: 18.00, image: images.lanche, featured: false },
-      { category: "Mais Pedidos", name: "X - Burger", desc: "Pão hambúrguer, queijo, presunto e batata palha.", price: 8.00, image: images.lanche3, featured: false },
+    const rawProducts = [
+      { category:"Promocao do dia", name:"Promocao familia", desc:"4 X-tudo e 1 Guarana Kuat 2L.", price:54.99, image:images.combo, featured:true, promo:true },
+      { category:"Promocao do dia", name:"X tudo e guaravita", desc:"Combo simples para matar a fome com refrigerante Guaravita.", price:15.00, image:images.xtudo, featured:true, promo:true },
+      { category:"Promocao do dia", name:"Promocao de 2x tudo e 2 Guaravita", desc:"Dois X-tudo completos acompanhados de 2 Guaravita.", price:25.00, image:images.combo, featured:true, promo:true },
+      { category:"Promocao do dia", name:"Promocao de pizza", desc:"Na compra de 2 pizzas, escolha qualquer sabor.", price:30.00, image:images.pizza, promo:true },
 
-      // Porções
-      { category: "Nossas Porções", name: "Batatas c/ Bacon", desc: "Batata, bacon, calabresa, cheddar e catupiry.", price: 35.00, image: images.batata },
-      { category: "Nossas Porções", name: "Batata G", desc: "Batata, bacon, calabresa, cheddar e catupiry.", price: 20.00, image: images.batata },
-      { category: "Nossas Porções", name: "Frango a Passarinho", desc: "Uma porção de frango a passarinho, uma batata P e salada. Serve 4 pessoas.", price: 40.00, image: images.frango },
-      { category: "Nossas Porções", name: "Batata G com Cheddar e Catupiry", desc: "Batata cheddar e catupiry. Serve 2 pessoas.", price: 17.00, image: images.batata },
-      { category: "Nossas Porções", name: "Batata P", desc: "Batata, cheddar e catupiry.", price: 10.00, image: images.batata },
-      { category: "Nossas Porções", name: "Batatas c/ Calabresa", desc: "Batata, bacon, calabresa, cheddar e catupiry.", price: 12.00, image: images.batata },
-      { category: "Nossas Porções", name: "Pastel 20 cm Salgado ou Doce", desc: "Monte seu pastel de 20 cm.", price: 15.00, image: images.pastel },
+      { category:"Pizzas 35cm", name:"Pizza de Mussarela", desc:"Pizza tradicional de mussarela, molho suculento, tomate fresco e toque de oregano.", price:35.20, oldPrice:40.00, discount:"12%", image:images.pizza, featured:true },
+      { category:"Pizzas 35cm", name:"Pizza de Calabresa", desc:"Calabresa fatiada, cebola crocante, mussarela e oregano.", price:23.40, oldPrice:30.00, discount:"22%", image:images.pizza2 },
+      { category:"Pizzas 35cm", name:"Pizza 4 Queijos", desc:"Mistura cremosa de mussarela, gorgonzola, parmesao e catupiry.", price:30.00, image:images.pizza },
+      { category:"Pizzas 35cm", name:"Pizza de Bacon c/ Ovos", desc:"Bacon crocante com ovos frescos, queijo e molho especial.", price:30.00, image:images.pizza2 },
+      { category:"Pizzas 35cm", name:"Pizza Portuguesa", desc:"Presunto, bacon, calabresa, milho, ervilha, ovo, cebola, tomate e pimentao.", price:31.00, image:images.pizza },
+      { category:"Pizzas 35cm", name:"Pizza de Frango c/ Catupiry", desc:"Frango desfiado com catupiry cremoso e massa dourada.", price:30.00, image:images.pizza2 },
 
-      // Pastéis salgados
-      { category: "Pastéis Salgados", name: "Queijo Mussarela", desc: "Pastel 30 cm.", price: 18.00, image: images.pastel },
-      { category: "Pastéis Salgados", name: "Pizza", desc: "Queijo, presunto, tomate e orégano.", price: 18.00, image: images.pastel },
-      { category: "Pastéis Salgados", name: "Frango c/ Palmito", desc: "Pastel 30 cm.", price: 18.00, image: images.pastel },
-      { category: "Pastéis Salgados", name: "Queijo c/ Presunto", desc: "Pastel 30 cm.", price: 18.00, image: images.pastel },
-      { category: "Pastéis Salgados", name: "Frango c/ Catupiry e Cheddar", desc: "Pastel 30 cm.", price: 18.00, image: images.pastel },
-      { category: "Pastéis Salgados", name: "Calabresa c/ Queijo", desc: "Pastel 30 cm.", price: 18.00, image: images.pastel },
-      { category: "Pastéis Salgados", name: "Carne", desc: "Pastel 30 cm.", price: 18.00, image: images.pastel },
-      { category: "Pastéis Salgados", name: "Queijo Minas c/ Orégano", desc: "Pastel 30 cm.", price: 18.00, image: images.pastel },
-      { category: "Pastéis Salgados", name: "Misto", desc: "Carne, frango, queijo, mussarela, calabresa, cheddar, catupiry, azeitona e palmito.", price: 18.00, image: images.pastel },
+      { category:"Pizzas Doces", name:"Beijinho", desc:"Pizza doce de beijinho com coco e leite condensado.", price:45.00, image:images.pizza },
+      { category:"Pizzas Doces", name:"Banana Nevada", desc:"Mussarela, banana, doce de leite e chocolate branco.", price:65.00, image:images.pizza2 },
+      { category:"Pizzas Doces", name:"Brigadeiro c/ Confete", desc:"Chocolate cremoso com confeitos coloridos.", price:48.00, image:images.pizza },
 
-      // Pastéis doces
-      { category: "Pastéis Doces", name: "Chocolate c/ Queijo", desc: "Pastel 30 cm.", price: 18.00, image: images.pastel },
-      { category: "Pastéis Doces", name: "Banana", desc: "Pastel 30 cm.", price: 18.00, image: images.pastel },
-      { category: "Pastéis Doces", name: "Banana c/ Chocolate", desc: "Pastel 30 cm.", price: 18.00, image: images.pastel },
-      { category: "Pastéis Doces", name: "Romeu e Julieta", desc: "Pastel 30 cm.", price: 18.00, image: images.pastel },
-      { category: "Pastéis Doces", name: "Confetes c/ Chocolate", desc: "Pastel 30 cm.", price: 18.00, image: images.pastel },
-      { category: "Pastéis Doces", name: "Banana c/ Canela", desc: "Pastel 30 cm.", price: 18.00, image: images.pastel },
+      { category:"Hamburgueres", name:"X EG", desc:"Pao, carne suculenta, ovo, queijo derretido, salada fresca e molho especial.", price:12.00, image:images.burger },
+      { category:"Hamburgueres", name:"Duplo Cheddar", desc:"Duas carnes suculentas, duas fatias de cheddar e molho cheddar.", price:15.00, image:images.burger2 },
+      { category:"Hamburgueres", name:"Hamburguer", desc:"Classico com pao macio, carne, salada fresca e molho especial.", price:9.00, image:images.burger },
+      { category:"Hamburgueres", name:"X-Tudo", desc:"Pao, carne, queijo, presunto, bacon, milho, ervilha, batata palha e salada.", price:15.00, image:images.xtudo, featured:true },
+      { category:"Hamburgueres", name:"X-Burguer", desc:"Pao crocante, carne saborosa, queijo derretido, presunto, batata palha e salada.", price:11.00, image:images.burger2 },
+      { category:"Hamburgueres", name:"X-Bacon", desc:"Pao, carne, ovo, queijo, presunto, muito bacon, milho, ervilha, batata palha e salada.", price:17.00, image:images.xtudo, featured:true },
+      { category:"Hamburgueres", name:"Mega Montanha", desc:"Pao, 2 carnes, 2 ovos, bacon, calabresa, 2 queijos, 2 presuntos, salada, milho e ervilha.", price:22.00, image:images.xtudo },
 
-      // Lanches
-      { category: "Nossos Lanches", name: "X - Picanha", desc: "Pão hambúrguer de picanha, bacon, calabresa, ovo, queijo, presunto, alface, tomate e batata palha.", price: 17.00, image: images.lanche2 },
-      { category: "Nossos Lanches", name: "X - Salada", desc: "Pão hambúrguer, queijo, alface, tomate e batata palha.", price: 12.00, image: images.lanche },
-      { category: "Nossos Lanches", name: "X - Egg", desc: "Pão hambúrguer, ovo, queijo e batata palha.", price: 12.00, image: images.lanche3 },
-      { category: "Nossos Lanches", name: "X - Montanha", desc: "Pão 2 carnes 2 ovos bacon calabresa queijo presunto alface tomate e batata palha.", price: 18.00, image: images.lanche2 },
-      { category: "Nossos Lanches", name: "Big Casa", desc: "Pão 3 carnes de picanha, 3 ovos, presunto, queijo, cebola na chapa, alface e tomate.", price: 25.00, image: images.lanche },
-      { category: "Nossos Lanches", name: "X - Bacon", desc: "Pão, hambúrguer, queijo cheddar, presunto e bacon.", price: 13.00, image: images.lanche3 },
-      { category: "Nossos Lanches", name: "X Montanhão", desc: "Pão, 2 hambúrgueres de picanha, 2 ovos, bacon, calabresa, queijo, presunto, alface, tomate e batata palha.", price: 23.00, image: images.lanche2 },
-      { category: "Nossos Lanches", name: "Misto Quente", desc: "Pão de forma, queijo e presunto.", price: 7.00, image: images.lanche },
-      { category: "Nossos Lanches", name: "X - Burger", desc: "Pão hambúrguer, queijo, presunto e batata palha.", price: 8.00, image: images.lanche3 },
-      { category: "Nossos Lanches", name: "Delícia de Filé", desc: "Peito de frango, pão árabe, queijo minas, ovo, orégano, cebola, alface e tomate.", price: 20.00, image: images.frango },
-      { category: "Nossos Lanches", name: "X - Tudo", desc: "Pão hambúrguer, bacon, calabresa, ovo, queijo, presunto, alface, tomate e batata palha.", price: 15.00, image: images.lanche2 },
-      { category: "Nossos Lanches", name: "X - Egg Bacon Salada", desc: "Pão hambúrguer, ovo, bacon, queijo, alface, tomate e batata palha.", price: 14.00, image: images.lanche },
-      { category: "Nossos Lanches", name: "X Bacon Duplo", desc: "Pão, 2 hambúrgueres, 2 queijos, bacon e batata palha.", price: 16.00, image: images.lanche3 },
-      { category: "Nossos Lanches", name: "X - Calabresa", desc: "Pão hambúrguer, calabresa, queijo e batata palha.", price: 12.00, image: images.lanche },
-      { category: "Nossos Lanches", name: "Sanduíche Natural", desc: "Pão de forma, patê de frango, azeita, tomate e alface.", price: 8.00, image: images.lanche3 },
-      { category: "Nossos Lanches", name: "2 x Bacon Duplos + Batata Frita P com Cheddar e Catupiry + 2 Guaracamp", desc: "Combo promocional especial.", price: 37.00, image: images.combo },
+      { category:"Porcoes", name:"12 Und Bolinho de Bacalhau", desc:"Bolinho de bacalhau crocante por fora e macio por dentro.", price:38.00, image:images.cod },
+      { category:"Porcoes", name:"Batata com Bacon & Cheddar Media", desc:"Batatas fritas medias cobertas com bacon crocante e cheddar derretido.", price:27.00, image:images.fries },
+      { category:"Porcoes", name:"Batata G na Caixa de Pizza 25 cm", desc:"Batata frita servida em caixa de pizza de 25cm.", price:45.00, image:images.fries },
+      { category:"Porcoes", name:"Batata Simples Media", desc:"Batata frita media, perfeita para acompanhar qualquer pedido.", price:15.00, image:images.fries },
+      { category:"Porcoes", name:"Batata com Bacon & Cheddar Grande", desc:"Porcao grande de batatas com bacon crocante e cheddar.", price:32.00, image:images.fries },
+      { category:"Porcoes", name:"25 Uni. Salgadinhos", desc:"Selecao variada de salgadinhos para festas ou encontros.", price:20.00, image:images.snack },
+      { category:"Porcoes", name:"Batata Simples Grande", desc:"Batata frita grande, crocante e dourada.", price:19.99, image:images.fries },
 
-      // Sucos e vitaminas
-      { category: "Sucos e Vitaminas", name: "Copo Suco 500ml", desc: "Escolha o sabor.", price: 9.00, image: images.suco },
-      { category: "Sucos e Vitaminas", name: "Copo Vitamina 500ml", desc: "Escolha o sabor.", price: 12.00, image: images.suco },
+      { category:"Combos", name:"Combo Artesanal", desc:"3 Cheddar Burgers, batatas com cheddar e bacon, 25 salgadinhos, 6 aneis de cebola e 2 litros.", price:110.00, image:images.combo },
+      { category:"Combos", name:"Combo para 2 Pessoas", desc:"2 X-tudo suculentos, batatas com cheddar e bacon e acompanhamentos.", price:65.00, image:images.combo },
+      { category:"Combos", name:"Combo para 4 Pessoas", desc:"4 X-tudo, batatas com cheddar e bacon, 25 salgadinhos, aneis de cebola e refrigerante.", price:115.00, image:images.combo },
+      { category:"Combos", name:"COMBO para 3 Pessoas", desc:"3 X-tudo deliciosos, batatas com cheddar e bacon, 20 salgadinhos e 2 litros.", price:89.00, image:images.combo },
 
-      // Combos
-      { category: "Nossos Combos", name: "Combo 03", desc: "2 X-Tudo, 10 salgadinhos, 5 anéis de cebola, batata frita, catupiry, cheddar, azeitona e ovo de codorna.", price: 55.00, image: images.combo },
-      { category: "Nossos Combos", name: "Combo 02", desc: "2 X-Tudo, batatas fritas, 10 salgadinhos, 5 nuggets, 8 ovos de codorna.", price: 55.00, image: images.combo },
-      { category: "Nossos Combos", name: "Combo 01", desc: "3 X-Egg, 7 pasteizinhos, 8 ovos de codorna, 10 salgadinhos, batata frita, azeitona, cheddar, catupiry e refrigerante 2 litros.", price: 70.00, image: images.combo },
-      { category: "Nossos Combos", name: "Combo 04", desc: "3 X-Saladas, 10 nuggets, 20 salgadinhos, batata frita, molho especial e refrigerantes de 2 litros.", price: 75.00, image: images.combo },
-      { category: "Nossos Combos", name: "Combo 05", desc: "4 X-Egg Saladas, 8 ovos de codorna, porção de calabresa, 10 nuggets, batata frita com cheddar e catupiry e refrigerante 2 litros.", price: 80.00, image: images.combo },
+      { category:"Acai Tradicional", name:"Acai Tradicional 200ml", desc:"Acai tradicional com acompanhamentos simples, fruta e cobertura a escolha.", price:8.00, image:images.acai },
+      { category:"Acai Tradicional", name:"Acai Tradicional 300ml", desc:"Acai cremoso de 300ml com cobertura a sua escolha.", price:10.00, image:images.acai },
+      { category:"Acai Tradicional", name:"Acai Tradicional 500ml", desc:"Acai de 500ml para matar a vontade.", price:14.00, image:images.acai },
+      { category:"Acai Tradicional", name:"Acai Tradicional 400ml", desc:"Acai de 400ml com fruta e cobertura.", price:12.00, image:images.acai },
+      { category:"Acai Tradicional", name:"Acai Tradicional 700ml", desc:"Acai de 700ml para quem quer reforcar.", price:16.00, image:images.acai },
+      { category:"Acai Tradicional", name:"Acai Tradicional 1 Litro", desc:"Acai tradicional 1 litro com acompanhamentos.", price:25.00, image:images.acai },
 
-      // Bebidas
-      { category: "Bebidas", name: "Refrigerante Antarctica 1 Litro", desc: "Garrafa 1L.", price: 8.00, image: images.bebida },
-      { category: "Bebidas", name: "Coca-Cola Original 2 Litros", desc: "Garrafa 2L.", price: 13.00, image: images.bebida },
-      { category: "Bebidas", name: "Refrigerante Guaraná Antarctica Lata 350ml", desc: "Lata 350ml.", price: 6.00, image: images.bebida },
-      { category: "Bebidas", name: "Refrigerante de Cola Pepsi 350ml", desc: "Lata 350ml.", price: 6.00, image: images.bebida },
-      { category: "Bebidas", name: "Refrigerante 2L Sukita Uva ou Laranja", desc: "Sukita uva e laranja.", price: 10.00, image: images.bebida },
-      { category: "Bebidas", name: "Coca-Cola Original 350ml", desc: "Lata 350ml.", price: 6.00, image: images.bebida },
-      { category: "Bebidas", name: "Suco Pronto Guaracamp Guaraná 285ml", desc: "Embalagem 285ml.", price: 2.50, image: images.suco },
-      { category: "Bebidas", name: "Pepsi 2 Litros", desc: "Refrigerante 2L.", price: 13.00, image: images.bebida },
-      { category: "Bebidas", name: "Sprinter 2L", desc: "Garrafa 2L.", price: 13.00, image: images.bebida },
+      { category:"Sundae", name:"Sundae Morango ou Chocolate 200ml", desc:"Sundae cremoso nos sabores morango ou chocolate.", price:8.00, image:images.sundae },
+      { category:"Milkshakes", name:"Morango ou Chocolate 300ml", desc:"Milkshake cremoso de morango ou chocolate.", price:15.00, image:images.shake },
 
-      // Entregas / adicionais / promoções
-      { category: "Lanches Entregas", name: "Trio Casa do Lanche", desc: "1 X-Salada + 1 Batata P + 1 Guaracamp.", price: 17.00, image: images.combo },
-      { category: "Molhos", name: "Maionese da Casa", desc: "Maionese temperada.", price: 1.00, image: images.salgado },
+      { category:"Sucos", name:"Laranja Copo 300ml", desc:"Suco de laranja fresco em copo de 300ml.", price:9.00, image:images.juice },
+      { category:"Sucos", name:"Limao Jarra 1lt", desc:"Jarra de suco de limao, citrico e refrescante.", price:25.00, image:images.juice },
+      { category:"Sucos", name:"Maracuja Copo 300ml", desc:"Suco de maracuja tropical e refrescante.", price:10.00, image:images.juice },
+      { category:"Sucos", name:"Limao Copo 300ml", desc:"Suco de limao em copo de 300ml.", price:8.00, image:images.juice },
+      { category:"Sucos", name:"Laranja Jarra 1lt", desc:"Jarra de suco de laranja para compartilhar.", price:30.00, image:images.juice },
 
-      { category: "Salgadinhos Delivery", name: "100 Salgadinhos Misto", desc: "Coxinha, salsicha, queijo com presunto e bolinha de queijo.", price: 36.99, image: images.salgado },
-      { category: "Salgadinhos Delivery", name: "50 Salgadinhos Misto", desc: "Coxinha, bolinha de queijo, queijo com presunto e salsicha.", price: 20.00, image: images.salgado },
-      { category: "Salgadinhos Delivery", name: "12 Salgadinhos Misto", desc: "Coxinha, bolinha de queijo, queijo com presunto.", price: 10.00, image: images.salgado },
-      { category: "Salgadinhos Delivery", name: "100 Salgadinhos Misto + Refrigerante de 2L", desc: "Promoção somente para entregas.", price: 45.00, image: images.salgado },
+      { category:"Bebidas", name:"Guaravita", desc:"Bebida tradicional sabor guarana.", price:3.00, image:images.drink },
+      { category:"Bebidas", name:"Lata", desc:"Sabores refrescantes em lata. Consulte disponibilidade.", price:6.00, image:images.drink },
+      { category:"Bebidas", name:"Fanta Sabores", desc:"Garrafa de Fanta sabores variados.", price:12.00, image:images.drink },
+      { category:"Bebidas", name:"Guaraviton", desc:"Bebida energetica sabor guarana.", price:7.50, image:images.drink },
+      { category:"Bebidas", name:"Guarana Antarctica 1lt", desc:"Guarana Antarctica versao 1 litro.", price:7.50, image:images.drink },
+      { category:"Bebidas", name:"Coca-Cola 2lt", desc:"Coca-Cola 2 litros para compartilhar.", price:15.00, image:images.drink },
+      { category:"Bebidas", name:"Agua Tonica", desc:"Agua tonica classica e refrescante.", price:6.00, image:images.drink },
+      { category:"Bebidas", name:"Sukita 2lt", desc:"Sukita 2 litros em sabores disponiveis.", price:9.50, image:images.drink },
+      { category:"Bebidas", name:"Coca cola 600 ml", desc:"Coca-Cola 600ml gelada.", price:8.00, image:images.drink },
 
-      { category: "Pastel 20 cm", name: "Monte seu Pastel Salgado ou Doce", desc: "Pastel salgado ou doce de 20 cm.", price: 15.00, image: images.pastel },
+      { category:"Cachorro quente", name:"Cachorro quente", desc:"Pao, molho, milho, ervilha, ketchup, maionese da casa, ovo de codorna, batata palha, cheddar e catupiry.", price:14.00, image:images.hotdog, featured:true },
+      { category:"Cachorro quente", name:"Cachorro quente de 2 salsicha ou linguica", desc:"Versao reforcada com 2 salsichas ou linguica e acompanhamentos.", price:18.00, image:images.hotdog },
 
-      { category: "Salgadinhos", name: "Porções com 100 Salgadinhos Misto", desc: "Coxinha, carne, quibe, queijo com presunto, queijo e salsicha.", price: 36.00, image: images.salgado },
+      { category:"Petiscos", name:"Isca de alcatra", desc:"Porcao de isca de alcatra.", price:55.00, image:images.meat },
+      { category:"Petiscos", name:"Frango a passarinho", desc:"Porcao de frango a passarinho.", price:45.00, image:images.cod },
+      { category:"Petiscos", name:"Carne de sol", desc:"Porcao de carne de sol.", price:70.00, image:images.meat },
+      { category:"Petiscos", name:"Calabresa acebolada com fritas", desc:"Calabresa acebolada acompanhada de fritas.", price:35.00, image:images.fries },
 
-      { category: "Promoções", name: "3 Pastel Grande 30 cm Ganha 1 Mini 20 cm Doce", desc: "Salgado 30 cm: frango, queijo, presunto, carne, palmito, calabresa, catupiry, cheddar, azeitona, milho, ovo e orégano.", price: 54.00, image: images.pastel },
-      { category: "Promoções", name: "2 x Bacon Duplo + Batata Frita P + 2 Guaracamp", desc: "2 x bacon + 1 batata P com cheddar e catupiry cremoso + 2 Guaracamp.", price: 37.00, image: images.combo }
+      { category:"Hamburguer artesanal", name:"Mega cheddar", desc:"Pao brioche, 2 blends, bacon e muito cheddar.", price:29.00, image:images.burger2 },
+      { category:"Hamburguer artesanal", name:"Mega Bacon", desc:"Pao brioche, 2 blends, muito bacon e cheddar.", price:32.99, image:images.burger },
+      { category:"Hamburguer artesanal", name:"Mega nordestino", desc:"Pao brioche, blend de carne de sol, duplo queijo coalho e molho de ervas finas.", price:28.99, image:images.burger2 },
+      { category:"Hamburguer artesanal", name:"Mega chiken", desc:"Pao brioche, blend de frango empanado, fatias de cheddar e salada.", price:28.99, image:images.burger },
+
+      { category:"Caldos", name:"Caldo de mocoto", desc:"Mocoto, molho, calabresa e bacon.", price:0, image:images.meat, soldOut:true },
+      { category:"Caldos", name:"Caldo de ervilha", desc:"Ervilha, costelinha suina, bacon e calabresa.", price:0, image:images.meat, soldOut:true }
     ];
 
+    const products = rawProducts.map((item, index) => ({ ...item, id:index }));
     let cart = [];
     let currentCategory = "Todos";
 
+    const siteHeader = document.getElementById("siteHeader");
     const featuredGrid = document.getElementById("featuredGrid");
+    const promoGrid = document.getElementById("promoGrid");
     const categoryFilters = document.getElementById("categoryFilters");
     const menuContainer = document.getElementById("menuContainer");
     const searchInput = document.getElementById("searchInput");
@@ -1427,40 +1708,53 @@
     const overlay = document.getElementById("overlay");
 
     function formatPrice(value){
-      return value.toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-      });
+      return value.toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
     }
 
     function getCategories(){
-      return ["Todos", ...new Set(products.map(p => p.category))];
+      return ["Todos", ...new Set(products.map(product => product.category))];
     }
 
     function renderFeatured(){
-      const featuredItems = products.filter(item => item.featured).slice(0, 3);
+      const featuredItems = products.filter(item => item.featured).slice(0, 8);
 
       featuredGrid.innerHTML = featuredItems.map(item => `
-        <div class="featured-card">
-          <img src="${item.image}" alt="${item.name}">
+        <article class="featured-card">
+          <img src="${item.image}" alt="${item.name}" loading="lazy">
           <div class="featured-body">
             <h3>${item.name}</h3>
             <p>${item.desc}</p>
             <div class="price-row">
               <span class="price">${formatPrice(item.price)}</span>
-              <button class="add-btn" onclick="addToCart('${item.name.replace(/'/g, "\\'")}')">+</button>
+              <button class="add-btn" type="button" onclick="addToCart(${item.id})" aria-label="Adicionar ${item.name}">+</button>
             </div>
           </div>
-        </div>
+        </article>
+      `).join("");
+    }
+
+    function renderPromos(){
+      const promos = products.filter(item => item.promo).slice(0, 4);
+
+      promoGrid.innerHTML = promos.map(item => `
+        <article class="promo-card">
+          <div>
+            <h3>${item.name}</h3>
+            <p>${item.desc}</p>
+            <div class="price-row">
+              <span class="price">${formatPrice(item.price)}</span>
+              <button class="add-btn" type="button" onclick="addToCart(${item.id})" aria-label="Adicionar ${item.name}">+</button>
+            </div>
+          </div>
+          <img src="${item.image}" alt="${item.name}" loading="lazy">
+        </article>
       `).join("");
     }
 
     function renderCategoryButtons(){
-      const cats = getCategories();
-
-      categoryFilters.innerHTML = cats.map(cat => `
-        <button class="cat-btn ${cat === currentCategory ? "active" : ""}" onclick="setCategory('${cat.replace(/'/g, "\\'")}')">
-          ${cat}
+      categoryFilters.innerHTML = getCategories().map(category => `
+        <button class="cat-btn ${category === currentCategory ? "active" : ""}" type="button" onclick="setCategory('${category}')">
+          ${category}
         </button>
       `).join("");
     }
@@ -1485,15 +1779,22 @@
       });
     }
 
+    function renderPrice(item){
+      if(item.soldOut){
+        return '<span class="sold-out">Esgotado</span>';
+      }
+
+      const oldPrice = item.oldPrice ? `<span class="old-price">${formatPrice(item.oldPrice)}</span>` : "";
+      const discount = item.discount ? `<span class="discount">${item.discount}</span>` : "";
+
+      return `<span class="product-price">${formatPrice(item.price)}${oldPrice}${discount}</span>`;
+    }
+
     function renderMenu(){
       const filtered = getFilteredProducts();
 
       if(filtered.length === 0){
-        menuContainer.innerHTML = `
-          <div style="background:#fff;border:1px solid #e9e9e9;border-radius:18px;padding:28px;text-align:center;color:#333;">
-            Nenhum item encontrado.
-          </div>
-        `;
+        menuContainer.innerHTML = '<div class="empty-state">Nenhum item encontrado.</div>';
         return;
       }
 
@@ -1503,70 +1804,66 @@
         const items = filtered.filter(item => item.category === category);
 
         return `
-          <div class="menu-category">
+          <section class="menu-category">
             <h3>${category}</h3>
             <div class="products-grid">
               ${items.map(item => `
-                <div class="product-card">
+                <article class="product-card">
                   <div class="product-info">
                     <h4>${item.name}</h4>
                     <p>${item.desc}</p>
                     <div class="product-bottom">
-                      <span class="product-price">${formatPrice(item.price)}</span>
-                      <button class="add-btn" onclick="addToCart('${item.name.replace(/'/g, "\\'")}')">+</button>
+                      ${renderPrice(item)}
+                      ${item.soldOut ? "" : `<button class="add-btn" type="button" onclick="addToCart(${item.id})" aria-label="Adicionar ${item.name}">+</button>`}
                     </div>
                   </div>
-                  <img src="${item.image}" alt="${item.name}">
-                </div>
+                  <img src="${item.image}" alt="${item.name}" loading="lazy">
+                </article>
               `).join("")}
             </div>
-          </div>
+          </section>
         `;
       }).join("");
     }
 
-    function addToCart(productName){
-      const product = products.find(item => item.name === productName);
-      if(!product) return;
+    function addToCart(productId){
+      const product = products.find(item => item.id === productId);
+      if(!product || product.soldOut) return;
 
-      const existing = cart.find(item => item.name === product.name);
+      const existing = cart.find(item => item.id === product.id);
 
       if(existing){
         existing.qty += 1;
       } else {
-        cart.push({...product, qty:1});
+        cart.push({ ...product, qty:1 });
       }
 
       updateCart();
       openCart();
     }
 
-    function changeQty(productName, amount){
-      const item = cart.find(i => i.name === productName);
+    function changeQty(productId, amount){
+      const item = cart.find(product => product.id === productId);
       if(!item) return;
 
       item.qty += amount;
 
       if(item.qty <= 0){
-        cart = cart.filter(i => i.name !== productName);
+        cart = cart.filter(product => product.id !== productId);
       }
 
       updateCart();
     }
 
     function updateCart(){
-      const totalItems = cart.reduce((acc, item) => acc + item.qty, 0);
-      const totalValue = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      const totalValue = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
       cartCount.textContent = totalItems;
       cartTotal.textContent = formatPrice(totalValue);
 
       if(cart.length === 0){
-        cartItems.innerHTML = `
-          <div style="text-align:center;color:#666;padding:30px 10px;">
-            Seu carrinho está vazio.
-          </div>
-        `;
+        cartItems.innerHTML = '<div class="empty-state">Seu pedido esta vazio. Adicione os itens do cardapio.</div>';
         return;
       }
 
@@ -1576,9 +1873,9 @@
           <div class="cart-line">
             <span>${formatPrice(item.price)}</span>
             <div class="qty">
-              <button onclick="changeQty('${item.name.replace(/'/g, "\\'")}', -1)">-</button>
+              <button type="button" onclick="changeQty(${item.id}, -1)">-</button>
               <strong>${item.qty}</strong>
-              <button onclick="changeQty('${item.name.replace(/'/g, "\\'")}', 1)">+</button>
+              <button type="button" onclick="changeQty(${item.id}, 1)">+</button>
             </div>
           </div>
         </div>
@@ -1601,25 +1898,38 @@
         return;
       }
 
-      let message = "Olá! Quero fazer um pedido na Casa do Lanche:%0A%0A";
+      let message = "Ola! Quero fazer um pedido na Mega Lanches:\n\n";
       let total = 0;
 
       cart.forEach(item => {
-        const subtotal = item.price * item.qty;
-        total += subtotal;
-        message += `• ${item.qty}x ${item.name} - ${formatPrice(item.price)}%0A`;
+        total += item.price * item.qty;
+        message += `${item.qty}x ${item.name} - ${formatPrice(item.price)}\n`;
       });
 
-      message += `%0ATotal: ${formatPrice(total)}%0A%0A`;
-      message += "Aguardo confirmação do pedido.";
+      message += `\nTotal: ${formatPrice(total)}\n\n`;
+      message += "Aguardo confirmacao do pedido.";
 
-      const url = `https://wa.me/${NUMERO_WHATSAPP}?text=${message}`;
-      window.open(url, "_blank");
+      window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(message)}`, "_blank");
     }
 
+    window.addEventListener("scroll", () => {
+      siteHeader.classList.toggle("scrolled", window.scrollY > 70);
+    });
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold:.12 });
+
+    document.querySelectorAll(".reveal").forEach(element => revealObserver.observe(element));
     searchInput.addEventListener("input", renderMenu);
 
     renderFeatured();
+    renderPromos();
     renderCategoryButtons();
     renderMenu();
     updateCart();
