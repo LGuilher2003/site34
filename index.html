@@ -3,45 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Mega Lanches - cardapio digital com lanches, pizzas, combos, acai, porcoes, sucos e bebidas." />
-  <title>Mega Lanches | Cardapio Digital</title>
+  <meta name="description" content="Hamburgueria Artesanal Sa - cardápio digital com burgers artesanais, combos, fritos e bebidas." />
+  <title>Hamburgueria Artesanal Sa | Cardápio Digital</title>
 
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap");
 
     :root{
-      --black:#060606;
-      --black-2:#101010;
-      --black-3:#181818;
-      --orange:#ff7a18;
-      --orange-2:#ff9a2f;
-      --red:#ef1c24;
-      --cream:#fff6e8;
-      --paper:#faf7f2;
-      --line:#ece2d7;
-      --text:#17130f;
-      --muted:#6f6258;
+      --black:#050505;
+      --ink:#111111;
+      --panel:#181512;
+      --charcoal:#211d19;
+      --paper:#faf7f0;
+      --card:#ffffff;
+      --cream:#fff1d5;
+      --gold:#f4b23b;
+      --gold-2:#ffd46a;
+      --red:#d71920;
+      --green:#21b66f;
+      --text:#16120f;
+      --muted:#73685e;
+      --line:#eadfd1;
       --white:#ffffff;
-      --green:#25d366;
-      --shadow:0 18px 48px rgba(0,0,0,.18);
-      --shadow-strong:0 24px 80px rgba(0,0,0,.42);
+      --shadow:0 18px 52px rgba(0,0,0,.16);
+      --shadow-strong:0 28px 90px rgba(0,0,0,.42);
       --container:min(1180px, calc(100% - 32px));
     }
 
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
+    *{ box-sizing:border-box; margin:0; padding:0; }
 
-    html{
-      scroll-behavior:smooth;
-    }
+    html{ scroll-behavior:smooth; }
 
     body{
       min-height:100vh;
       color:var(--text);
-      background:var(--paper);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.76), rgba(255,255,255,.9)),
+        radial-gradient(circle at 20% 0%, rgba(244,178,59,.16), transparent 34%),
+        var(--paper);
       font-family:"Inter", Arial, sans-serif;
       overflow-x:hidden;
     }
@@ -52,24 +51,13 @@
       inset:0;
       pointer-events:none;
       z-index:100;
-      opacity:.16;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.28'/%3E%3C/svg%3E");
+      opacity:.12;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.26'/%3E%3C/svg%3E");
     }
 
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    img{
-      display:block;
-      max-width:100%;
-    }
-
-    button,
-    input{
-      font:inherit;
-    }
+    a{ color:inherit; text-decoration:none; }
+    img{ display:block; max-width:100%; }
+    button,input{ font:inherit; }
 
     .container{
       width:var(--container);
@@ -78,7 +66,7 @@
 
     .reveal{
       opacity:0;
-      transform:translateY(28px);
+      transform:translateY(26px);
       transition:opacity .7s ease, transform .7s ease;
     }
 
@@ -91,38 +79,37 @@
       position:fixed;
       top:0;
       left:0;
-      z-index:50;
+      z-index:55;
       width:100%;
-      background:linear-gradient(90deg, var(--red), var(--orange), var(--red));
-      color:#170b03;
-      font-size:.76rem;
-      font-weight:900;
-      letter-spacing:.08em;
-      text-transform:uppercase;
+      padding:8px 12px;
+      color:#110904;
+      background:linear-gradient(90deg, var(--gold), var(--gold-2), var(--gold));
       text-align:center;
-      padding:7px 12px;
+      font-size:.76rem;
+      font-weight:950;
+      letter-spacing:.09em;
+      text-transform:uppercase;
     }
 
     header{
       position:fixed;
-      top:30px;
+      top:32px;
       left:0;
+      z-index:54;
       width:100%;
-      z-index:49;
-      background:rgba(6,6,6,.82);
-      border-bottom:1px solid rgba(255,122,24,.28);
+      background:rgba(5,5,5,.82);
+      border-bottom:1px solid rgba(244,178,59,.24);
       backdrop-filter:blur(18px);
       transition:.25s ease;
     }
 
     header.scrolled{
-      top:30px;
-      background:rgba(6,6,6,.94);
-      box-shadow:0 18px 50px rgba(0,0,0,.24);
+      background:rgba(5,5,5,.96);
+      box-shadow:0 18px 50px rgba(0,0,0,.22);
     }
 
     .nav{
-      min-height:76px;
+      min-height:78px;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -130,92 +117,63 @@
     }
 
     .brand{
+      min-width:max-content;
       display:flex;
       align-items:center;
       gap:12px;
       color:var(--white);
-      min-width:max-content;
     }
 
-    .mega-logo{
-      width:58px;
-      height:58px;
+    .sa-logo{
+      width:62px;
+      height:62px;
       position:relative;
       display:grid;
       place-items:center;
-      border:2px solid var(--red);
+      border:2px solid rgba(255,255,255,.9);
       border-radius:50%;
-      background:#050505;
-      box-shadow:0 0 26px rgba(255,66,24,.26);
+      background:#020202;
+      box-shadow:0 0 0 4px rgba(244,178,59,.16), 0 0 28px rgba(244,178,59,.2);
+      isolation:isolate;
       overflow:hidden;
     }
 
-    .mega-logo::before,
-    .mega-logo::after{
+    .sa-logo::before{
+      content:"";
       position:absolute;
-      left:50%;
-      transform:translateX(-50%);
+      width:78%;
+      height:78%;
+      border:2px dashed rgba(255,255,255,.75);
+      border-radius:50%;
+      animation:spin 18s linear infinite;
+    }
+
+    .sa-logo strong{
+      position:relative;
+      z-index:1;
+      color:#fff;
       font-family:"Anton", Impact, sans-serif;
+      font-size:2.05rem;
+      letter-spacing:.06em;
       line-height:1;
+    }
+
+    .brand-title{ display:grid; line-height:1; }
+
+    .brand-title strong{
+      color:var(--gold);
+      font-family:"Anton", Impact, sans-serif;
+      font-size:1.42rem;
+      font-weight:400;
       letter-spacing:.04em;
       text-transform:uppercase;
     }
 
-    .mega-logo::before{
-      content:"MEGA";
-      top:8px;
-      color:var(--orange);
-      font-size:13px;
-    }
-
-    .mega-logo::after{
-      content:"LANCHES";
-      bottom:8px;
-      color:var(--red);
-      font-size:12px;
-    }
-
-    .burger-mark{
-      position:relative;
-      width:31px;
-      height:24px;
-      margin-top:4px;
-      border-radius:16px 16px 10px 10px;
-      background:linear-gradient(#f9a43a 0 42%, #f3d35d 42% 50%, #5fbf46 50% 58%, #de2a1e 58% 70%, #8a3f19 70% 86%, #f29a2f 86%);
-      box-shadow:0 0 0 2px rgba(0,0,0,.25) inset;
-    }
-
-    .burger-mark::before,
-    .burger-mark::after{
-      content:"";
-      position:absolute;
-      top:7px;
-      width:5px;
-      height:5px;
-      border-radius:50%;
-      background:#fff;
-      box-shadow:0 0 0 1px #111 inset;
-    }
-
-    .burger-mark::before{ left:8px; }
-    .burger-mark::after{ right:8px; }
-
-    .brand-title{
-      display:grid;
-      line-height:1;
-    }
-
-    .brand-title strong{
-      font-family:"Anton", Impact, sans-serif;
-      font-size:1.5rem;
-      letter-spacing:.04em;
-      color:var(--orange);
-    }
-
     .brand-title span{
-      color:#f9f0e4;
-      font-size:.78rem;
-      font-weight:800;
+      margin-top:4px;
+      color:#f6ead9;
+      font-size:.76rem;
+      font-weight:850;
       letter-spacing:.13em;
       text-transform:uppercase;
     }
@@ -224,60 +182,60 @@
       display:flex;
       align-items:center;
       gap:24px;
-      color:#f2dfce;
+      color:#f4e6d4;
       font-size:.78rem;
-      font-weight:900;
-      letter-spacing:.11em;
+      font-weight:950;
+      letter-spacing:.1em;
       text-transform:uppercase;
     }
 
     .nav-links a{
       position:relative;
-      padding:6px 0;
+      padding:8px 0;
     }
 
     .nav-links a::after{
       content:"";
       position:absolute;
       left:0;
-      bottom:0;
+      bottom:2px;
       width:0;
       height:2px;
-      background:var(--orange);
+      background:var(--gold);
       transition:.2s ease;
     }
 
-    .nav-links a:hover::after{
-      width:100%;
-    }
+    .nav-links a:hover::after{ width:100%; }
 
     .btn{
+      min-height:46px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-height:46px;
+      gap:9px;
       border:0;
       border-radius:8px;
+      padding:0 20px;
+      color:#130904;
+      background:linear-gradient(135deg, var(--gold), var(--gold-2));
       cursor:pointer;
-      color:#140a04;
-      background:linear-gradient(135deg, var(--orange), #ffd24d);
-      padding:0 22px;
+      font-size:.8rem;
       font-weight:950;
-      letter-spacing:.06em;
+      letter-spacing:.07em;
       text-transform:uppercase;
-      box-shadow:0 14px 32px rgba(255,122,24,.22);
+      box-shadow:0 15px 34px rgba(244,178,59,.25);
       transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
     }
 
     .btn:hover{
       transform:translateY(-2px);
-      filter:saturate(1.1);
-      box-shadow:0 18px 42px rgba(255,122,24,.3);
+      filter:saturate(1.08);
+      box-shadow:0 20px 44px rgba(244,178,59,.32);
     }
 
     .btn-outline{
       color:var(--white);
-      background:rgba(255,255,255,.05);
+      background:rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.2);
       box-shadow:none;
     }
@@ -288,25 +246,25 @@
       display:flex;
       align-items:center;
       overflow:hidden;
-      padding:142px 0 78px;
+      padding:148px 0 90px;
       color:var(--white);
       background:
-        linear-gradient(120deg, rgba(0,0,0,.92) 0 42%, rgba(0,0,0,.72) 68%, rgba(0,0,0,.92) 100%),
-        url("https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1800&q=88") center/cover;
+        linear-gradient(105deg, rgba(0,0,0,.96) 0 37%, rgba(0,0,0,.76) 63%, rgba(0,0,0,.94) 100%),
+        url("https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1900&q=88") center/cover;
     }
 
     .hero::before{
       content:"";
       position:absolute;
-      top:86px;
+      top:108px;
       left:0;
       width:100%;
-      height:120px;
+      height:118px;
       background:
-        linear-gradient(90deg, transparent 0 7%, var(--orange) 7% 74%, transparent 74%),
-        linear-gradient(180deg, transparent 0 64%, rgba(0,0,0,.75) 64%);
-      clip-path:polygon(0 0, 100% 0, 100% 76%, 70% 64%, 28% 94%, 0 72%);
-      opacity:.95;
+        linear-gradient(90deg, transparent 0 5%, var(--gold) 5% 72%, transparent 72%),
+        linear-gradient(180deg, transparent 0 64%, rgba(0,0,0,.78) 64%);
+      clip-path:polygon(0 0, 100% 0, 100% 74%, 74% 64%, 30% 92%, 0 70%);
+      opacity:.9;
     }
 
     .hero::after{
@@ -322,7 +280,7 @@
       position:relative;
       z-index:2;
       display:grid;
-      grid-template-columns:minmax(0, 1fr) minmax(360px, 520px);
+      grid-template-columns:minmax(0, 1fr) minmax(340px, 500px);
       align-items:center;
       gap:54px;
     }
@@ -332,11 +290,11 @@
       align-items:center;
       gap:9px;
       margin-bottom:22px;
-      color:#1a0d04;
-      background:var(--orange);
+      color:#120804;
+      background:var(--gold);
       border-radius:999px;
-      padding:9px 16px;
-      font-size:.76rem;
+      padding:9px 15px;
+      font-size:.75rem;
       font-weight:950;
       letter-spacing:.13em;
       text-transform:uppercase;
@@ -347,31 +305,30 @@
       width:8px;
       height:8px;
       border-radius:50%;
-      background:#18c65b;
-      box-shadow:0 0 0 6px rgba(24,198,91,.18);
+      background:var(--red);
+      box-shadow:0 0 0 6px rgba(215,25,32,.18);
     }
 
     .hero h1{
-      max-width:760px;
+      max-width:780px;
       font-family:"Anton", Impact, sans-serif;
-      font-size:clamp(4rem, 9vw, 8.7rem);
+      font-size:clamp(3.7rem, 8.4vw, 8.4rem);
       font-weight:400;
-      line-height:.86;
+      line-height:.88;
       letter-spacing:.01em;
       text-transform:uppercase;
-      text-shadow:0 10px 35px rgba(0,0,0,.52);
+      text-shadow:0 12px 38px rgba(0,0,0,.55);
     }
 
     .hero h1 span{
       display:block;
-      color:var(--orange);
-      -webkit-text-stroke:1px rgba(255,255,255,.1);
+      color:var(--gold);
     }
 
     .hero p{
-      max-width:620px;
+      max-width:650px;
       margin:24px 0 28px;
-      color:#f5e5d5;
+      color:#f7e6d2;
       font-size:1.08rem;
       line-height:1.75;
     }
@@ -380,30 +337,30 @@
       display:flex;
       flex-wrap:wrap;
       gap:13px;
-      margin-bottom:26px;
+      margin-bottom:28px;
     }
 
     .hero-proof{
       display:grid;
       grid-template-columns:repeat(3, minmax(0, 1fr));
       gap:12px;
-      max-width:680px;
+      max-width:720px;
     }
 
     .proof-item{
-      min-height:86px;
+      min-height:88px;
       padding:16px;
-      border:1px solid rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.14);
       border-radius:8px;
-      background:rgba(255,255,255,.055);
+      background:rgba(255,255,255,.06);
       backdrop-filter:blur(10px);
     }
 
     .proof-item strong{
       display:block;
-      color:var(--orange);
+      color:var(--gold);
       font-family:"Anton", Impact, sans-serif;
-      font-size:1.6rem;
+      font-size:1.5rem;
       font-weight:400;
       letter-spacing:.03em;
       line-height:1;
@@ -412,155 +369,122 @@
     .proof-item span{
       display:block;
       margin-top:8px;
-      color:#f4ded0;
+      color:#f4dfc8;
       font-size:.82rem;
       font-weight:750;
       line-height:1.35;
     }
 
-    .hero-visual{
-      min-height:560px;
-      position:relative;
-      display:grid;
-      place-items:center;
-    }
-
-    .hero-visual::before{
-      content:"";
-      position:absolute;
-      width:92%;
-      aspect-ratio:1;
-      border-radius:50%;
-      background:radial-gradient(circle, rgba(255,122,24,.42), transparent 62%);
-      filter:blur(8px);
-      animation:pulse 4.8s ease-in-out infinite;
-    }
-
-    .menu-poster{
+    .brand-poster{
       position:relative;
       width:min(440px, 92vw);
       min-height:520px;
-      border:1px solid rgba(255,122,24,.4);
+      margin-left:auto;
+      border:1px solid rgba(244,178,59,.38);
       border-radius:14px;
       overflow:hidden;
+      color:#fff;
       background:
-        linear-gradient(180deg, #050505 0 40%, #111 100%),
-        var(--black);
+        linear-gradient(180deg, rgba(5,5,5,.15), rgba(5,5,5,.95)),
+        url("https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=1100&q=88") center/cover;
       box-shadow:var(--shadow-strong);
-      transform:rotate(2deg);
+      transform:rotate(1.4deg);
       animation:float 5.5s ease-in-out infinite;
     }
 
-    .poster-stripe{
-      height:118px;
-      position:relative;
-      background:var(--orange);
-      clip-path:polygon(0 0, 100% 0, 100% 72%, 82% 62%, 58% 88%, 33% 66%, 0 78%);
+    .poster-top{
+      padding:26px;
+      min-height:158px;
+      background:linear-gradient(135deg, rgba(215,25,32,.86), rgba(244,178,59,.84));
+      clip-path:polygon(0 0, 100% 0, 100% 78%, 82% 68%, 58% 90%, 34% 69%, 0 82%);
     }
 
-    .poster-stripe::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(8deg, transparent 0 13%, #050505 13% 20%, transparent 20% 32%, #050505 32% 39%, transparent 39% 62%, #050505 62% 72%, transparent 72%),
-        linear-gradient(170deg, transparent 0 50%, rgba(0,0,0,.7) 50% 56%, transparent 56%);
-      opacity:.9;
-    }
-
-    .poster-title{
-      position:relative;
-      z-index:1;
-      padding:28px 32px;
-      font-family:"Anton", Impact, sans-serif;
-      color:#fff;
-      font-size:3.7rem;
-      line-height:.9;
-      letter-spacing:.04em;
+    .poster-top span{
+      display:block;
+      color:#170906;
+      font-size:.76rem;
+      font-weight:950;
+      letter-spacing:.14em;
       text-transform:uppercase;
-      text-shadow:0 8px 0 rgba(0,0,0,.22);
     }
 
-    .poster-body{
-      display:grid;
-      place-items:center;
-      padding:34px 28px 26px;
+    .poster-top strong{
+      display:block;
+      margin-top:8px;
+      font-family:"Anton", Impact, sans-serif;
+      font-size:3.2rem;
+      font-weight:400;
+      line-height:.9;
+      text-transform:uppercase;
+      text-shadow:0 8px 0 rgba(0,0,0,.16);
+    }
+
+    .poster-content{
+      min-height:362px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding:28px;
     }
 
     .poster-logo{
-      width:246px;
-      height:246px;
+      width:210px;
+      height:210px;
+      margin:0 auto 28px;
+      display:grid;
+      place-items:center;
+      border:3px solid #fff;
+      border-radius:50%;
+      background:#000;
+      box-shadow:0 18px 42px rgba(0,0,0,.35);
     }
 
-    .poster-logo::before{
-      top:34px;
-      font-size:46px;
+    .poster-logo strong{
+      font-family:"Anton", Impact, sans-serif;
+      font-size:5rem;
+      line-height:1;
+      letter-spacing:.08em;
     }
-
-    .poster-logo::after{
-      bottom:31px;
-      font-size:42px;
-    }
-
-    .poster-logo .burger-mark{
-      width:100px;
-      height:78px;
-      margin-top:10px;
-      border-radius:48px 48px 25px 25px;
-    }
-
-    .poster-logo .burger-mark::before,
-    .poster-logo .burger-mark::after{
-      top:24px;
-      width:15px;
-      height:15px;
-    }
-
-    .poster-logo .burger-mark::before{ left:28px; }
-    .poster-logo .burger-mark::after{ right:28px; }
 
     .poster-note{
-      width:100%;
       display:grid;
       grid-template-columns:1fr auto;
       gap:14px;
       align-items:center;
-      margin-top:30px;
-      padding:18px;
+      padding:16px;
+      border:1px solid rgba(255,255,255,.2);
       border-radius:8px;
-      color:#fff3e4;
-      background:linear-gradient(135deg, rgba(239,28,36,.26), rgba(255,122,24,.16));
-      border:1px solid rgba(255,122,24,.28);
+      background:rgba(0,0,0,.58);
+      backdrop-filter:blur(10px);
     }
 
     .poster-note strong{
       display:block;
-      font-size:1rem;
+      color:#fff;
+      font-size:.96rem;
       text-transform:uppercase;
     }
 
     .poster-note span{
       display:block;
       margin-top:5px;
-      color:#f8cdb4;
-      font-size:.86rem;
+      color:#f7dec0;
+      font-size:.84rem;
     }
 
     .poster-price{
+      color:var(--gold);
       font-family:"Anton", Impact, sans-serif;
-      color:var(--orange);
       font-size:2rem;
       white-space:nowrap;
     }
 
-    .section{
-      padding:82px 0;
-    }
+    .section{ padding:82px 0; }
 
     .section-title{
       display:flex;
-      justify-content:space-between;
       align-items:end;
+      justify-content:space-between;
       gap:24px;
       margin-bottom:30px;
     }
@@ -580,42 +504,40 @@
       content:"";
       width:34px;
       height:3px;
-      background:linear-gradient(90deg, var(--red), var(--orange));
+      background:linear-gradient(90deg, var(--red), var(--gold));
     }
 
     .section-title h2{
       margin-top:10px;
-      color:var(--black);
+      color:var(--ink);
       font-family:"Anton", Impact, sans-serif;
-      font-size:clamp(2.3rem, 5vw, 4.2rem);
+      font-size:clamp(2.35rem, 5vw, 4.25rem);
       font-weight:400;
       line-height:.95;
       text-transform:uppercase;
     }
 
-    .section-title h2 span{
-      color:var(--orange);
-    }
+    .section-title h2 span{ color:var(--gold); }
 
     .section-title p{
-      max-width:470px;
+      max-width:490px;
       color:var(--muted);
       line-height:1.65;
-      font-weight:600;
+      font-weight:650;
     }
 
     .featured{
       position:relative;
-      z-index:2;
-      margin-top:-44px;
+      z-index:3;
+      margin-top:-46px;
     }
 
     .featured-shell{
-      padding:30px;
+      padding:28px;
+      border:1px solid var(--line);
       border-radius:14px;
       background:#fff;
       box-shadow:var(--shadow);
-      border:1px solid var(--line);
     }
 
     .featured-grid{
@@ -625,45 +547,42 @@
     }
 
     .featured-card{
-      position:relative;
-      min-height:285px;
+      min-height:288px;
       display:flex;
       flex-direction:column;
       overflow:hidden;
       border-radius:8px;
-      background:#121212;
       color:#fff;
-      box-shadow:0 12px 24px rgba(0,0,0,.16);
+      background:#111;
+      box-shadow:0 12px 24px rgba(0,0,0,.14);
       isolation:isolate;
     }
 
     .featured-card img{
       width:100%;
-      height:168px;
+      height:166px;
       object-fit:cover;
       transition:transform .45s ease;
     }
 
-    .featured-card:hover img{
-      transform:scale(1.08);
-    }
+    .featured-card:hover img{ transform:scale(1.08); }
 
     .featured-body{
-      display:flex;
       flex:1;
+      display:flex;
       flex-direction:column;
       padding:15px;
-      background:linear-gradient(180deg, #171717, #080808);
+      background:linear-gradient(180deg, #17130f, #070707);
     }
 
     .featured-body h3{
-      font-size:1rem;
-      line-height:1.18;
       margin-bottom:8px;
+      font-size:1rem;
+      line-height:1.2;
     }
 
     .featured-body p{
-      color:#ccbdb2;
+      color:#d8c9b8;
       font-size:.8rem;
       line-height:1.45;
       display:-webkit-box;
@@ -682,7 +601,7 @@
     }
 
     .price{
-      color:var(--orange);
+      color:var(--gold);
       font-weight:950;
       white-space:nowrap;
     }
@@ -693,92 +612,114 @@
       flex:0 0 38px;
       border:0;
       border-radius:50%;
-      color:#180a02;
-      background:var(--orange);
+      color:#170804;
+      background:var(--gold);
       cursor:pointer;
-      font-weight:950;
       font-size:1.3rem;
+      font-weight:950;
       transition:.2s ease;
     }
 
     .add-btn:hover{
       transform:rotate(90deg) scale(1.06);
-      background:#ffd24d;
+      background:var(--gold-2);
     }
 
-    .promo-band{
+    .info-band{
       position:relative;
       color:#fff;
       background:
-        linear-gradient(90deg, rgba(6,6,6,.97), rgba(6,6,6,.76)),
-        url("https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1800&q=88") center/cover;
+        linear-gradient(90deg, rgba(5,5,5,.96), rgba(5,5,5,.74)),
+        url("https://images.unsplash.com/photo-1610614819513-58e34989848b?auto=format&fit=crop&w=1800&q=88") center/cover;
       overflow:hidden;
     }
 
-    .promo-band::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(100deg, transparent 0 55%, rgba(255,122,24,.22) 55% 100%);
-    }
-
-    .promo-grid{
+    .info-grid{
       position:relative;
       display:grid;
-      grid-template-columns:1fr 1fr;
+      grid-template-columns:1.05fr .95fr;
       gap:18px;
     }
 
-    .promo-card{
+    .info-panel{
+      min-height:190px;
+      padding:24px;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:8px;
+      background:rgba(255,255,255,.065);
+      backdrop-filter:blur(10px);
+    }
+
+    .info-panel h3{
+      margin-bottom:16px;
+      font-size:1rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .schedule{
       display:grid;
-      grid-template-columns:1fr 118px;
-      min-height:130px;
-      gap:18px;
+      gap:10px;
+    }
+
+    .schedule-row,
+    .payment-row{
+      display:flex;
       align-items:center;
-      padding:18px;
+      justify-content:space-between;
+      gap:16px;
+      color:#f5e4cf;
+      font-size:.92rem;
+      font-weight:700;
+    }
+
+    .schedule-row strong,
+    .payment-row strong{ color:#fff; }
+
+    .payment-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:10px;
+    }
+
+    .payment-row{
+      justify-content:flex-start;
+      padding:12px;
       border:1px solid rgba(255,255,255,.13);
       border-radius:8px;
-      background:rgba(255,255,255,.06);
-      backdrop-filter:blur(8px);
+      background:rgba(0,0,0,.22);
     }
 
-    .promo-card h3{
-      font-size:1rem;
-      margin-bottom:6px;
-    }
-
-    .promo-card p{
-      color:#f1d9c8;
-      font-size:.86rem;
-      line-height:1.45;
-      margin-bottom:10px;
-    }
-
-    .promo-card img{
-      width:118px;
-      height:92px;
-      object-fit:cover;
-      border-radius:8px;
+    .payment-icon{
+      width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      flex:0 0 34px;
+      border-radius:50%;
+      color:#150804;
+      background:var(--gold);
+      font-weight:950;
     }
 
     .menu-wrap{
-      background:var(--paper);
       padding:86px 0;
+      background:var(--paper);
     }
 
     .menu-controls{
       position:sticky;
-      top:92px;
-      z-index:30;
+      top:112px;
+      z-index:35;
       display:grid;
-      grid-template-columns:minmax(240px, 360px) 1fr;
-      gap:14px;
+      grid-template-columns:minmax(220px, 360px) 1fr;
       align-items:center;
+      gap:14px;
       margin-bottom:34px;
       padding:14px;
       border:1px solid var(--line);
       border-radius:12px;
-      background:rgba(255,255,255,.9);
+      background:rgba(255,255,255,.93);
       box-shadow:0 12px 30px rgba(0,0,0,.06);
       backdrop-filter:blur(16px);
     }
@@ -796,8 +737,8 @@
     }
 
     .search-input:focus{
-      border-color:var(--orange);
-      box-shadow:0 0 0 4px rgba(255,122,24,.13);
+      border-color:var(--gold);
+      box-shadow:0 0 0 4px rgba(244,178,59,.16);
     }
 
     .category-filters{
@@ -813,7 +754,7 @@
       flex:0 0 auto;
       border:1px solid var(--line);
       border-radius:999px;
-      color:#332216;
+      color:#302318;
       background:#fff;
       padding:0 16px;
       cursor:pointer;
@@ -853,7 +794,7 @@
       width:10px;
       height:34px;
       border-radius:999px;
-      background:linear-gradient(180deg, var(--red), var(--orange));
+      background:linear-gradient(180deg, var(--red), var(--gold));
     }
 
     .products-grid{
@@ -863,10 +804,10 @@
     }
 
     .product-card{
+      min-height:132px;
       display:grid;
       grid-template-columns:1fr 126px;
       gap:16px;
-      min-height:132px;
       padding:14px;
       border:1px solid var(--line);
       border-radius:8px;
@@ -878,7 +819,7 @@
     .product-card:hover{
       transform:translateY(-3px);
       border-color:#111;
-      box-shadow:0 16px 32px rgba(0,0,0,.1);
+      box-shadow:0 16px 34px rgba(0,0,0,.1);
     }
 
     .product-info{
@@ -919,177 +860,124 @@
       white-space:nowrap;
     }
 
-    .old-price{
-      margin-left:6px;
-      color:#9c8f86;
-      font-size:.76rem;
-      font-weight:800;
-      text-decoration:line-through;
-    }
-
-    .discount{
-      margin-left:6px;
-      border-radius:4px;
-      color:#fff;
-      background:var(--orange);
-      padding:2px 5px;
-      font-size:.65rem;
-      font-weight:950;
-    }
-
-    .sold-out{
-      display:inline-flex;
-      min-height:31px;
-      align-items:center;
-      border-radius:6px;
-      color:#fff;
-      background:#191919;
-      padding:0 10px;
-      font-size:.74rem;
-      font-weight:950;
-      text-transform:uppercase;
-    }
-
     .product-card img{
       width:126px;
       height:104px;
       align-self:center;
-      border-radius:8px;
       object-fit:cover;
-      background:#f3f3f3;
+      border-radius:8px;
+      background:#eee;
     }
 
-    .about{
-      color:#fff;
-      background:#0a0a0a;
-      padding:82px 0;
-      overflow:hidden;
+    .empty-state{
+      padding:28px;
+      border:1px dashed var(--line);
+      border-radius:8px;
+      color:var(--muted);
+      background:#fff;
+      text-align:center;
+      font-weight:800;
     }
 
     .about-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:42px;
-      align-items:center;
+      gap:22px;
+      align-items:stretch;
     }
 
-    .about h2{
-      font-family:"Anton", Impact, sans-serif;
-      font-size:clamp(2.4rem, 5vw, 4.4rem);
-      font-weight:400;
-      line-height:.98;
-      text-transform:uppercase;
-      margin-bottom:18px;
-    }
-
-    .about h2 span{
-      color:var(--orange);
-    }
-
-    .about p{
-      max-width:560px;
-      color:#dac8ba;
-      line-height:1.75;
-      margin-bottom:15px;
-    }
-
-    .about-list{
+    .address-panel{
+      min-height:380px;
       display:grid;
-      gap:13px;
-    }
-
-    .about-item{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding:18px;
-      border:1px solid rgba(255,122,24,.18);
+      align-content:center;
+      gap:18px;
+      padding:34px;
       border-radius:8px;
-      background:rgba(255,255,255,.045);
+      color:#fff;
+      background:
+        linear-gradient(160deg, rgba(5,5,5,.94), rgba(33,29,25,.9)),
+        url("https://images.unsplash.com/photo-1561758033-d89a9ad46330?auto=format&fit=crop&w=1200&q=88") center/cover;
+      box-shadow:var(--shadow);
     }
 
-    .about-item::before{
-      content:"";
-      width:12px;
-      height:12px;
-      flex:0 0 12px;
-      margin-top:5px;
-      border-radius:50%;
-      background:var(--orange);
-      box-shadow:0 0 0 6px rgba(255,122,24,.14);
-    }
-
-    footer{
-      color:#c9b6a8;
-      background:#050505;
-      padding:32px 0;
-      border-top:1px solid rgba(255,122,24,.15);
-      text-align:center;
-      font-size:.9rem;
-      line-height:1.7;
-    }
-
-    footer strong{
-      color:var(--orange);
+    .address-panel h3{
       font-family:"Anton", Impact, sans-serif;
-      font-size:1.6rem;
+      font-size:2.5rem;
       font-weight:400;
-      letter-spacing:.04em;
+      line-height:1;
       text-transform:uppercase;
     }
 
-    .cart-fab{
+    .address-panel p{
+      color:#f2dcc1;
+      line-height:1.7;
+      font-weight:700;
+    }
+
+    .map-wrap{
+      min-height:380px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#ddd;
+      box-shadow:var(--shadow);
+    }
+
+    .map-wrap iframe{
+      width:100%;
+      height:100%;
+      min-height:380px;
+      border:0;
+      display:block;
+      filter:saturate(.9) contrast(1.04);
+    }
+
+    .cart-button{
       position:fixed;
       right:22px;
       bottom:22px;
       z-index:60;
-      width:62px;
-      height:62px;
+      min-width:168px;
+      min-height:58px;
       border:0;
-      border-radius:50%;
-      color:#140a04;
-      background:linear-gradient(135deg, var(--orange), #ffd24d);
-      box-shadow:0 18px 45px rgba(0,0,0,.28);
+      border-radius:999px;
+      color:#130804;
+      background:linear-gradient(135deg, var(--gold), var(--gold-2));
+      box-shadow:0 18px 46px rgba(0,0,0,.26);
       cursor:pointer;
-      font-size:1.45rem;
       font-weight:950;
-      transition:.2s ease;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      transition:.22s ease;
     }
 
-    .cart-fab:hover{
-      transform:translateY(-3px) scale(1.03);
-    }
+    .cart-button:hover{ transform:translateY(-2px); }
 
     .cart-count{
-      position:absolute;
-      top:-5px;
-      right:-5px;
       min-width:24px;
       height:24px;
-      display:grid;
+      display:inline-grid;
       place-items:center;
-      border:2px solid #fff;
+      margin-left:8px;
       border-radius:50%;
       color:#fff;
-      background:var(--red);
-      font-size:.72rem;
-      font-weight:950;
+      background:#111;
+      font-size:.78rem;
     }
 
     .overlay{
       position:fixed;
       inset:0;
       z-index:70;
-      visibility:hidden;
+      background:rgba(0,0,0,.55);
       opacity:0;
-      background:rgba(0,0,0,.58);
-      backdrop-filter:blur(4px);
-      transition:.25s ease;
+      pointer-events:none;
+      transition:.2s ease;
     }
 
     .overlay.show{
-      visibility:visible;
       opacity:1;
+      pointer-events:auto;
     }
 
     .cart-panel{
@@ -1101,55 +989,55 @@
       height:100vh;
       display:flex;
       flex-direction:column;
-      color:#111;
       background:#fff;
-      box-shadow:-30px 0 70px rgba(0,0,0,.24);
+      box-shadow:-22px 0 70px rgba(0,0,0,.28);
       transform:translateX(105%);
-      transition:.3s ease;
+      transition:.28s ease;
     }
 
-    .cart-panel.open{
-      transform:translateX(0);
-    }
+    .cart-panel.open{ transform:translateX(0); }
 
-    .cart-header{
+    .cart-head{
       display:flex;
       align-items:center;
       justify-content:space-between;
+      gap:14px;
       padding:22px;
       color:#fff;
-      background:#0b0b0b;
-      border-bottom:4px solid var(--orange);
+      background:#0a0a0a;
     }
 
-    .cart-header h3{
+    .cart-head h3{
       font-family:"Anton", Impact, sans-serif;
-      font-size:2rem;
+      font-size:1.8rem;
       font-weight:400;
+      letter-spacing:.03em;
       text-transform:uppercase;
     }
 
-    .close-btn{
-      width:42px;
-      height:42px;
-      border:1px solid rgba(255,255,255,.18);
+    .close-cart{
+      width:40px;
+      height:40px;
+      border:1px solid rgba(255,255,255,.2);
       border-radius:50%;
       color:#fff;
-      background:rgba(255,255,255,.06);
+      background:transparent;
       cursor:pointer;
-      font-size:1.4rem;
+      font-size:1.2rem;
     }
 
     .cart-items{
       flex:1;
+      display:grid;
+      align-content:start;
+      gap:12px;
       overflow:auto;
       padding:18px;
-      background:#f8f5ef;
+      background:var(--paper);
     }
 
     .cart-item{
-      margin-bottom:12px;
-      padding:14px;
+      padding:15px;
       border:1px solid var(--line);
       border-radius:8px;
       background:#fff;
@@ -1158,24 +1046,22 @@
     .cart-item strong{
       display:block;
       margin-bottom:10px;
-      line-height:1.25;
+      line-height:1.35;
     }
 
     .cart-line{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
+      gap:14px;
       color:var(--muted);
-      font-size:.9rem;
-      font-weight:800;
+      font-weight:850;
     }
 
     .qty{
       display:flex;
       align-items:center;
       gap:10px;
-      color:#111;
     }
 
     .qty button{
@@ -1183,326 +1069,247 @@
       height:30px;
       border:0;
       border-radius:50%;
-      color:#111;
-      background:#f1e7dc;
+      color:#160805;
+      background:var(--gold);
       cursor:pointer;
       font-weight:950;
     }
 
-    .cart-footer{
-      padding:18px;
+    .cart-foot{
+      padding:20px;
       border-top:1px solid var(--line);
       background:#fff;
     }
 
     .cart-total{
       display:flex;
-      justify-content:space-between;
       align-items:center;
+      justify-content:space-between;
       margin-bottom:14px;
       color:#111;
-      font-size:1.16rem;
+      font-size:1.2rem;
       font-weight:950;
     }
 
-    .whats-btn{
-      width:100%;
-      min-height:54px;
-      border:0;
-      border-radius:8px;
-      color:#fff;
-      background:var(--green);
-      cursor:pointer;
-      font-weight:950;
-      letter-spacing:.05em;
-      text-transform:uppercase;
+    footer{
+      padding:34px 0 94px;
+      color:#f4e2ca;
+      background:#050505;
     }
 
-    .empty-state{
-      padding:26px 14px;
-      color:#64564d;
-      text-align:center;
-      line-height:1.5;
-      font-weight:700;
+    .footer-grid{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      font-size:.88rem;
+      font-weight:750;
     }
 
-    @keyframes pulse{
-      0%, 100%{ opacity:.65; transform:scale(.95); }
-      50%{ opacity:1; transform:scale(1.05); }
-    }
+    .footer-grid strong{ color:var(--gold); }
 
     @keyframes float{
-      0%, 100%{ transform:rotate(2deg) translateY(0); }
-      50%{ transform:rotate(-1deg) translateY(-12px); }
+      0%,100%{ transform:translateY(0) rotate(1.4deg); }
+      50%{ transform:translateY(-14px) rotate(-.7deg); }
+    }
+
+    @keyframes spin{
+      to{ transform:rotate(360deg); }
     }
 
     @media (max-width:980px){
-      .nav-links{
-        display:none;
-      }
-
+      .nav-links{ display:none; }
       .hero-grid,
-      .about-grid{
-        grid-template-columns:1fr;
-      }
-
-      .hero{
-        padding-top:132px;
-      }
-
-      .hero-visual{
-        min-height:500px;
-        order:-1;
-      }
-
-      .hero-proof,
-      .featured-grid,
-      .products-grid{
-        grid-template-columns:repeat(2, minmax(0, 1fr));
-      }
-
-      .menu-controls{
-        grid-template-columns:1fr;
-      }
+      .info-grid,
+      .about-grid{ grid-template-columns:1fr; }
+      .brand-poster{ margin:12px auto 0; }
+      .featured-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+      .products-grid{ grid-template-columns:1fr; }
+      .menu-controls{ grid-template-columns:1fr; top:110px; }
     }
 
-    @media (max-width:680px){
+    @media (max-width:640px){
       .top-strip{
-        font-size:.65rem;
+        font-size:.66rem;
         line-height:1.35;
       }
 
-      header{
-        top:36px;
-      }
-
-      header.scrolled{
-        top:36px;
-      }
+      header{ top:34px; }
 
       .nav{
-        min-height:70px;
+        min-height:72px;
       }
 
-      .brand-title strong{
-        font-size:1.18rem;
+      .sa-logo{
+        width:52px;
+        height:52px;
       }
 
-      .brand-title span{
-        display:none;
-      }
+      .sa-logo strong{ font-size:1.72rem; }
 
-      .mega-logo{
-        width:50px;
-        height:50px;
-      }
-
-      .nav .btn{
-        min-height:40px;
-        padding:0 14px;
-        font-size:.72rem;
-      }
+      .brand-title strong{ font-size:1.08rem; }
+      .brand-title span{ font-size:.62rem; }
 
       .hero{
         min-height:auto;
-        padding:126px 0 62px;
+        padding:134px 0 72px;
       }
 
-      .hero::before{
-        top:86px;
-        height:84px;
-      }
-
-      .hero h1{
-        font-size:clamp(3rem, 17vw, 4.9rem);
-      }
-
-      .hero p{
-        font-size:.98rem;
-      }
-
-      .hero-actions{
-        display:grid;
-      }
-
-      .hero-actions .btn{
-        width:100%;
-      }
+      .hero h1{ font-size:clamp(3.1rem, 17vw, 4.8rem); }
+      .hero p{ font-size:.98rem; }
 
       .hero-proof,
-      .featured-grid,
-      .promo-grid,
-      .products-grid{
-        grid-template-columns:1fr;
-      }
-
-      .hero-visual{
-        min-height:420px;
-      }
-
-      .menu-poster{
-        width:min(330px, 92vw);
-        min-height:410px;
-      }
-
-      .poster-title{
-        font-size:2.7rem;
-        padding:24px;
-      }
-
-      .poster-logo{
-        width:186px;
-        height:186px;
-      }
-
-      .poster-logo::before{ top:26px; font-size:35px; }
-      .poster-logo::after{ bottom:24px; font-size:31px; }
-      .poster-logo .burger-mark{ width:76px; height:60px; }
-
-      .section{
-        padding:62px 0;
-      }
+      .payment-grid,
+      .featured-grid{ grid-template-columns:1fr; }
 
       .section-title{
         display:block;
       }
 
-      .section-title p{
-        margin-top:12px;
-      }
+      .section-title p{ margin-top:12px; }
 
-      .featured-shell{
-        padding:18px;
-      }
+      .featured-shell{ padding:16px; }
 
-      .promo-card,
       .product-card{
-        grid-template-columns:1fr;
+        grid-template-columns:1fr 92px;
+        gap:12px;
       }
 
-      .promo-card img,
       .product-card img{
-        width:100%;
-        height:180px;
-        order:-1;
+        width:92px;
+        height:88px;
       }
 
-      .menu-wrap{
-        padding:62px 0;
+      .product-info p{
+        -webkit-line-clamp:3;
       }
 
-      .menu-controls{
-        top:76px;
-        margin-left:-4px;
-        margin-right:-4px;
+      .poster-top strong{ font-size:2.55rem; }
+      .poster-logo{ width:174px; height:174px; }
+      .poster-logo strong{ font-size:4rem; }
+
+      .cart-button{
+        left:16px;
+        right:16px;
+        bottom:16px;
+        width:auto;
+      }
+
+      .footer-grid{
+        display:grid;
       }
     }
   </style>
 </head>
+
 <body>
-  <div class="top-strip">Aberto ate 23h30 - Pedido minimo R$ 15,00 - Mega Lanches</div>
+  <div class="top-strip" id="topStatus">Loja fechada, abre sexta às 19h30 • Pedido mínimo R$ 4,00</div>
 
   <header id="siteHeader">
     <div class="container nav">
-      <a href="#inicio" class="brand" aria-label="Mega Lanches">
-        <span class="mega-logo" aria-hidden="true"><span class="burger-mark"></span></span>
-        <span class="brand-title">
-          <strong>Mega Lanches</strong>
-          <span>Cardapio digital</span>
-        </span>
+      <a class="brand" href="#inicio" aria-label="Hamburgueria Artesanal Sa">
+        <div class="sa-logo" aria-hidden="true"><strong>SA</strong></div>
+        <div class="brand-title">
+          <strong>Hamburgueria Artesanal Sa</strong>
+          <span>Quem ama comer o original</span>
+        </div>
       </a>
 
-      <nav class="nav-links" aria-label="Navegacao principal">
-        <a href="#inicio">Inicio</a>
+      <nav class="nav-links" aria-label="Navegação principal">
         <a href="#mais-pedidos">Mais pedidos</a>
-        <a href="#promocoes">Promocoes</a>
-        <a href="#cardapio">Cardapio</a>
-        <a href="#sobre">Loja</a>
+        <a href="#cardapio">Cardápio</a>
+        <a href="#atendimento">Atendimento</a>
+        <a href="#endereco">Endereço</a>
       </nav>
 
-      <a class="btn" href="#cardapio">Pedir agora</a>
+      <a class="btn" href="#cardapio">Ver cardápio</a>
     </div>
   </header>
 
-  <main>
-    <section class="hero" id="inicio">
+  <main id="inicio">
+    <section class="hero">
       <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <div class="tag">Lanches, pizzas, acai e porcoes</div>
-          <h1>Cardapio <span>Mega Lanches</span></h1>
-          <p>
-            Um cardapio digital moderno para apresentar as promocoes do dia, pizzas,
-            hamburgueres, combos, acai, sucos e bebidas com pedido direto pelo WhatsApp.
-          </p>
+        <div class="reveal">
+          <span class="tag">Burger artesanal original</span>
+          <h1>Hamburgueria <span>Artesanal Sa</span></h1>
+          <p>Blend de 120g, pão brioche, cheddar cremoso, bacon crocante e combos montados para chegar quente, bonito e com cara de pedido caprichado.</p>
 
           <div class="hero-actions">
-            <a class="btn" href="#cardapio">Ver cardapio</a>
-            <button class="btn btn-outline" type="button" onclick="openCart()">Montar pedido</button>
+            <a class="btn" href="#cardapio">Escolher meu lanche</a>
+            <a class="btn btn-outline" href="#atendimento">Horários e pagamentos</a>
           </div>
 
-          <div class="hero-proof" aria-label="Informacoes da loja">
+          <div class="hero-proof">
             <div class="proof-item">
-              <strong>23h30</strong>
-              <span>atendimento aberto ate a noite</span>
+              <strong>R$ 4,00</strong>
+              <span>Pedido mínimo para entrega</span>
             </div>
             <div class="proof-item">
-              <strong>R$15</strong>
-              <span>pedido minimo informado no cardapio</span>
+              <strong>19h30</strong>
+              <span>Abre sexta, sábado e domingo</span>
             </div>
             <div class="proof-item">
-              <strong>+60</strong>
-              <span>opcoes entre lanches, pizzas e bebidas</span>
+              <strong>Online</strong>
+              <span>Pix, Google Pay, Nubank e crédito</span>
             </div>
           </div>
         </div>
 
-        <div class="hero-visual reveal" aria-label="Arte de cardapio Mega Lanches">
-          <div class="menu-poster">
-            <div class="poster-stripe">
-              <div class="poster-title">Cardapio</div>
-            </div>
-            <div class="poster-body">
-              <div class="mega-logo poster-logo" aria-hidden="true">
-                <span class="burger-mark"></span>
+        <div class="brand-poster reveal" aria-label="Destaque visual do cardápio">
+          <div class="poster-top">
+            <span>Mais pedido da torcida</span>
+            <strong>Burguer Guloso</strong>
+          </div>
+          <div class="poster-content">
+            <div class="poster-logo"><strong>SA</strong></div>
+            <div class="poster-note">
+              <div>
+                <strong>Combo 2 completo</strong>
+                <span>Burger, fritas crocantes e bebida gelada</span>
               </div>
-              <div class="poster-note">
-                <div>
-                  <strong>Promocao familia</strong>
-                  <span>4 X-tudo e 1 Guarana Kuat 2L</span>
-                </div>
-                <div class="poster-price">R$54,99</div>
-              </div>
+              <span class="poster-price">R$ 43</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="featured" id="mais-pedidos">
+    <section class="featured section" id="mais-pedidos">
       <div class="container featured-shell reveal">
         <div class="section-title">
           <div>
-            <div class="eyebrow">Destaques</div>
-            <h2>Os mais <span>pedidos</span></h2>
+            <span class="eyebrow">Mais pedidos da torcida</span>
+            <h2>Os campeões <span>da casa</span></h2>
           </div>
-          <p>Itens que aparecem no topo do cardapio do print, prontos para chamar atencao do cliente.</p>
+          <p>Atalhos para os itens que mais saem: combos, burgers artesanais e aquele lanche com cheddar que segura qualquer fome.</p>
         </div>
-
         <div class="featured-grid" id="featuredGrid"></div>
       </div>
     </section>
 
-    <section class="section promo-band" id="promocoes">
-      <div class="container">
-        <div class="section-title reveal">
-          <div>
-            <div class="eyebrow">Ofertas</div>
-            <h2 style="color:#fff;">Promocao <span>do dia</span></h2>
+    <section class="info-band section" id="atendimento">
+      <div class="container info-grid reveal">
+        <div class="info-panel">
+          <h3>Horário de atendimento</h3>
+          <div class="schedule">
+            <div class="schedule-row"><strong>Domingo</strong><span>19h30 às 23h30</span></div>
+            <div class="schedule-row"><strong>Sexta-feira</strong><span>19h30 às 23h30</span></div>
+            <div class="schedule-row"><strong>Sábado</strong><span>19h30 às 23h30</span></div>
+            <div class="schedule-row"><strong>Pedido mínimo</strong><span>R$ 4,00</span></div>
           </div>
-          <p style="color:#f0d9c8;">Combos e ofertas em destaque, com visual forte para vender rapido pelo WhatsApp.</p>
         </div>
 
-        <div class="promo-grid reveal" id="promoGrid"></div>
+        <div class="info-panel">
+          <h3>Formas de pagamento</h3>
+          <div class="payment-grid">
+            <div class="payment-row"><span class="payment-icon">Pix</span><div><strong>Pix</strong><br>Pagamento online</div></div>
+            <div class="payment-row"><span class="payment-icon">G</span><div><strong>Google Pay</strong><br>Pagamento online</div></div>
+            <div class="payment-row"><span class="payment-icon">Nu</span><div><strong>Nubank</strong><br>Pagamento online</div></div>
+            <div class="payment-row"><span class="payment-icon">Cr</span><div><strong>Cartão online</strong><br>Pagamento online</div></div>
+            <div class="payment-row"><span class="payment-icon">$</span><div><strong>Dinheiro</strong><br>Pagamento na entrega</div></div>
+            <div class="payment-row"><span class="payment-icon">Ct</span><div><strong>Cartão</strong><br>Pagamento na entrega</div></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1510,185 +1317,118 @@
       <div class="container">
         <div class="section-title reveal">
           <div>
-            <div class="eyebrow">Completo</div>
-            <h2>Nosso <span>cardapio</span></h2>
+            <span class="eyebrow">Cardápio digital</span>
+            <h2>Escolha seu <span>pedido</span></h2>
           </div>
-          <p>Busque por produto, filtre por categoria e adicione itens ao pedido do cliente.</p>
+          <p>Busque por nome, navegue por categoria e monte seu carrinho com os produtos da Hamburgueria Artesanal Sa.</p>
         </div>
 
-        <div class="menu-controls">
-          <input
-            class="search-input"
-            id="searchInput"
-            type="text"
-            placeholder="Buscar item no cardapio..."
-            autocomplete="off"
-          />
-          <div class="category-filters" id="categoryFilters" aria-label="Filtros de categoria"></div>
+        <div class="menu-controls reveal">
+          <input class="search-input" id="searchInput" type="search" placeholder="Buscar no cardápio..." aria-label="Buscar no cardápio">
+          <div class="category-filters" id="categoryFilters" aria-label="Categorias do cardápio"></div>
         </div>
 
         <div id="menuContainer"></div>
       </div>
     </section>
 
-    <section class="about" id="sobre">
-      <div class="container about-grid">
-        <div class="reveal">
-          <h2>Perfil da <span>loja</span></h2>
-          <p>
-            A Mega Lanches aparece com identidade forte em preto, laranja e vermelho,
-            cardapio amplo e foco em pedido rapido. Este modelo foi montado para
-            apresentar a loja de forma profissional para o cliente.
-          </p>
-          <p>
-            O numero do WhatsApp esta em uma constante no codigo para trocar pelo
-            contato real antes da entrega final.
-          </p>
-          <a class="btn" href="#cardapio">Fazer pedido</a>
+    <section class="section" id="endereco">
+      <div class="container about-grid reveal">
+        <div class="address-panel">
+          <span class="eyebrow">Endereço</span>
+          <h3>Retirada e entrega</h3>
+          <p>Rua Rangel Pestana, 621 - Bangu, Rio de Janeiro - RJ, 21820-040, Brasil.</p>
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Rua%20Rangel%20Pestana%20621%20Bangu%20Rio%20de%20Janeiro%20RJ" target="_blank" rel="noreferrer">Abrir no mapa</a>
         </div>
 
-        <div class="about-list reveal">
-          <div class="about-item">Cardapio digital organizado por categorias do print.</div>
-          <div class="about-item">Busca, filtros, carrinho e total automatico.</div>
-          <div class="about-item">Mensagem do pedido formatada para WhatsApp.</div>
-          <div class="about-item">Visual animado com vitrine, promocoes e destaques.</div>
+        <div class="map-wrap" aria-label="Mapa do endereço">
+          <iframe title="Mapa Hamburgueria Artesanal Sa" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Rua%20Rangel%20Pestana%20621%20Bangu%20Rio%20de%20Janeiro%20RJ&output=embed"></iframe>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <strong>Mega Lanches</strong><br />
-      Cardapio Digital - 2026
-    </div>
-  </footer>
-
-  <button class="cart-fab" type="button" onclick="openCart()" aria-label="Abrir pedido">
-    +
-    <span class="cart-count" id="cartCount">0</span>
-  </button>
+  <button class="cart-button" type="button" onclick="openCart()">Carrinho <span class="cart-count" id="cartCount">0</span></button>
 
   <div class="overlay" id="overlay" onclick="closeCart()"></div>
 
-  <aside class="cart-panel" id="cartPanel" aria-label="Meu pedido">
-    <div class="cart-header">
-      <h3>Meu pedido</h3>
-      <button class="close-btn" type="button" onclick="closeCart()" aria-label="Fechar pedido">x</button>
+  <aside class="cart-panel" id="cartPanel" aria-label="Carrinho de pedido">
+    <div class="cart-head">
+      <h3>Seu pedido</h3>
+      <button class="close-cart" type="button" onclick="closeCart()" aria-label="Fechar carrinho">×</button>
     </div>
-
     <div class="cart-items" id="cartItems"></div>
-
-    <div class="cart-footer">
+    <div class="cart-foot">
       <div class="cart-total">
         <span>Total</span>
-        <span id="cartTotal">R$ 0,00</span>
+        <strong id="cartTotal">R$ 0,00</strong>
       </div>
-      <button class="whats-btn" type="button" onclick="sendOrder()">Enviar pelo WhatsApp</button>
+      <button class="btn" type="button" style="width:100%" onclick="sendOrder()">Finalizar pedido</button>
     </div>
   </aside>
 
+  <footer>
+    <div class="container footer-grid">
+      <span><strong>Hamburgueria Artesanal Sa</strong> • Cardápio digital profissional</span>
+      <span>Loja aberta sexta, sábado e domingo das 19h30 às 23h30</span>
+    </div>
+  </footer>
+
   <script>
-    const NUMERO_WHATSAPP = "5521999999999";
+    const NUMERO_WHATSAPP = "";
 
     const images = {
-      xtudo: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=88",
-      burger: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=900&q=88",
-      burger2: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=900&q=88",
-      hotdog: "https://images.unsplash.com/photo-1612392062798-7f5b7a87e4d1?auto=format&fit=crop&w=900&q=88",
-      pizza: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=88",
-      pizza2: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=900&q=88",
-      fries: "https://images.unsplash.com/photo-1518013431117-eb1465fa5752?auto=format&fit=crop&w=900&q=88",
-      combo: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=900&q=88",
-      acai: "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=900&q=88",
-      sundae: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=900&q=88",
-      shake: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=900&q=88",
-      juice: "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&fit=crop&w=900&q=88",
-      drink: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=900&q=88",
-      snack: "https://images.unsplash.com/photo-1608039755401-742074f0548d?auto=format&fit=crop&w=900&q=88",
-      meat: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=88",
-      cod: "https://images.unsplash.com/photo-1562967916-eb82221dfb36?auto=format&fit=crop&w=900&q=88"
+      burger:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=88",
+      burger2:"https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=900&q=88",
+      burger3:"https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=900&q=88",
+      chicken:"https://images.unsplash.com/photo-1606755962773-d324e0a13086?auto=format&fit=crop&w=900&q=88",
+      combo:"https://images.unsplash.com/photo-1610614819513-58e34989848b?auto=format&fit=crop&w=900&q=88",
+      fries:"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=900&q=88",
+      nuggets:"https://images.unsplash.com/photo-1562967916-eb82221dfb36?auto=format&fit=crop&w=900&q=88",
+      soda:"https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=900&q=88",
+      juice:"https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&fit=crop&w=900&q=88",
+      tea:"https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=88",
+      beer:"https://images.unsplash.com/photo-1608270586620-248524c67de9?auto=format&fit=crop&w=900&q=88",
+      water:"https://images.unsplash.com/photo-1616118132534-381148898bb4?auto=format&fit=crop&w=900&q=88"
     };
 
     const rawProducts = [
-      { category:"Promocao do dia", name:"Promocao familia", desc:"4 X-tudo e 1 Guarana Kuat 2L.", price:54.99, image:images.combo, featured:true, promo:true },
-      { category:"Promocao do dia", name:"X tudo e guaravita", desc:"Combo simples para matar a fome com refrigerante Guaravita.", price:15.00, image:images.xtudo, featured:true, promo:true },
-      { category:"Promocao do dia", name:"Promocao de 2x tudo e 2 Guaravita", desc:"Dois X-tudo completos acompanhados de 2 Guaravita.", price:25.00, image:images.combo, featured:true, promo:true },
-      { category:"Promocao do dia", name:"Promocao de pizza", desc:"Na compra de 2 pizzas, escolha qualquer sabor.", price:30.00, image:images.pizza, promo:true },
+      { category:"Mais pedidos", name:"Combo 1", desc:"Burguer 1 com batata crinkle super crocante e refrigerante.", price:39.00, image:images.combo, featured:true },
+      { category:"Mais pedidos", name:"Burguer Guloso - 01", desc:"Pão brioche, blend de 120g, queijo cheddar, bacon, molho da casa, cebola caramelizada e picles.", price:29.00, image:images.burger, featured:true },
+      { category:"Mais pedidos", name:"Combo 2", desc:"Burguer 2 com batata crinkle super crocante e refrigerante.", price:43.00, image:images.combo, featured:true },
 
-      { category:"Pizzas 35cm", name:"Pizza de Mussarela", desc:"Pizza tradicional de mussarela, molho suculento, tomate fresco e toque de oregano.", price:35.20, oldPrice:40.00, discount:"12%", image:images.pizza, featured:true },
-      { category:"Pizzas 35cm", name:"Pizza de Calabresa", desc:"Calabresa fatiada, cebola crocante, mussarela e oregano.", price:23.40, oldPrice:30.00, discount:"22%", image:images.pizza2 },
-      { category:"Pizzas 35cm", name:"Pizza 4 Queijos", desc:"Mistura cremosa de mussarela, gorgonzola, parmesao e catupiry.", price:30.00, image:images.pizza },
-      { category:"Pizzas 35cm", name:"Pizza de Bacon c/ Ovos", desc:"Bacon crocante com ovos frescos, queijo e molho especial.", price:30.00, image:images.pizza2 },
-      { category:"Pizzas 35cm", name:"Pizza Portuguesa", desc:"Presunto, bacon, calabresa, milho, ervilha, ovo, cebola, tomate e pimentao.", price:31.00, image:images.pizza },
-      { category:"Pizzas 35cm", name:"Pizza de Frango c/ Catupiry", desc:"Frango desfiado com catupiry cremoso e massa dourada.", price:30.00, image:images.pizza2 },
+      { category:"Burguers", name:"Burguer Guloso - 01", desc:"Pão brioche, blend de 120g, queijo cheddar, bacon, molho da casa, cebola caramelizada e picles.", price:29.00, image:images.burger, featured:true },
+      { category:"Burguers", name:"Burguer N°2", desc:"Blend de 120g, pão de brioche, ovo, alface americana, duplo cheddar, bacon, cebola roxa, picles e molho verde da casa.", price:33.00, image:images.burger2 },
+      { category:"Burguers", name:"Burguer N°4", desc:"Blend de 120g, pão de brioche, creme de cheddar, bacon crispy, picles, cebola roxa e molho da casa.", price:33.00, image:images.burger3 },
+      { category:"Burguers", name:"Burguer N°5", desc:"Pão australiano, blend de 120g, creme de cheddar, cebola crispy, bacon e molho da casa.", price:35.00, image:images.burger2 },
+      { category:"Burguers", name:"Burguer de Frango Crispy", desc:"Frango crispy, pão brioche, queijo cheddar, alface americana, tomate, cebola roxa, picles e molho verde da casa.", price:30.00, image:images.chicken, featured:true },
+      { category:"Burguers", name:"Burger 10 - Smash Junior", desc:"Pão brioche, smash de 100g, queijo cheddar, bacon e molho da casa.", price:25.00, image:images.burger },
+      { category:"Burguers", name:"Poderoso Burguer N°11", desc:"Pão brioche, 120g de carne, geleia de bacon, queijo coalho gratinado e maionese de alho assado.", price:35.00, image:images.burger3, featured:true },
+      { category:"Burguers", name:"Burguer N°12 - Extreme", desc:"Carne de 120g, corn queijo provolone, rúcula, abacaxi caramelizado, molho barbecue e farofa de bacon no pão prime.", price:41.00, image:images.burger2, featured:true },
 
-      { category:"Pizzas Doces", name:"Beijinho", desc:"Pizza doce de beijinho com coco e leite condensado.", price:45.00, image:images.pizza },
-      { category:"Pizzas Doces", name:"Banana Nevada", desc:"Mussarela, banana, doce de leite e chocolate branco.", price:65.00, image:images.pizza2 },
-      { category:"Pizzas Doces", name:"Brigadeiro c/ Confete", desc:"Chocolate cremoso com confeitos coloridos.", price:48.00, image:images.pizza },
+      { category:"Combos", name:"Combo 1", desc:"Burguer 1 com batata crinkle super crocante e refrigerante.", price:39.00, image:images.combo, featured:true },
+      { category:"Combos", name:"Combo 2", desc:"Burguer 2 com batata crinkle super crocante e refrigerante.", price:43.00, image:images.combo, featured:true },
+      { category:"Combos", name:"Combo 4", desc:"Burguer 4 com batata crinkle super crocante e refrigerante.", price:43.00, image:images.combo },
+      { category:"Combos", name:"Combo 5", desc:"Burguer 5 com batata crinkle super crocante e refrigerante.", price:45.00, image:images.combo },
+      { category:"Combos", name:"Combo Frango Crispy", desc:"Burguer crispy com batata crinkle super crocante e refrigerante.", price:40.00, image:images.chicken },
+      { category:"Combos", name:"Combo Burguer Junior - 10", desc:"Pão de brioche, queijo cheddar, bacon e molho da casa com batata e refrigerante.", price:35.00, image:images.combo },
+      { category:"Combos", name:"Combo 11", desc:"Burguer 11 com batata crinkle super crocante e refrigerante.", price:45.00, image:images.combo },
+      { category:"Combos", name:"Combo Extreme", desc:"Burguer 12 Extreme com batata e bebida.", price:51.00, image:images.burger2, featured:true },
 
-      { category:"Hamburgueres", name:"X EG", desc:"Pao, carne suculenta, ovo, queijo derretido, salada fresca e molho especial.", price:12.00, image:images.burger },
-      { category:"Hamburgueres", name:"Duplo Cheddar", desc:"Duas carnes suculentas, duas fatias de cheddar e molho cheddar.", price:15.00, image:images.burger2 },
-      { category:"Hamburgueres", name:"Hamburguer", desc:"Classico com pao macio, carne, salada fresca e molho especial.", price:9.00, image:images.burger },
-      { category:"Hamburgueres", name:"X-Tudo", desc:"Pao, carne, queijo, presunto, bacon, milho, ervilha, batata palha e salada.", price:15.00, image:images.xtudo, featured:true },
-      { category:"Hamburgueres", name:"X-Burguer", desc:"Pao crocante, carne saborosa, queijo derretido, presunto, batata palha e salada.", price:11.00, image:images.burger2 },
-      { category:"Hamburgueres", name:"X-Bacon", desc:"Pao, carne, ovo, queijo, presunto, muito bacon, milho, ervilha, batata palha e salada.", price:17.00, image:images.xtudo, featured:true },
-      { category:"Hamburgueres", name:"Mega Montanha", desc:"Pao, 2 carnes, 2 ovos, bacon, calabresa, 2 queijos, 2 presuntos, salada, milho e ervilha.", price:22.00, image:images.xtudo },
+      { category:"Fritos", name:"Batata Crinkle pequena", desc:"Porção pequena de batata crinkle crocante.", price:12.00, image:images.fries },
+      { category:"Fritos", name:"Batata Crinkle com Cheddar e Bacon Média", desc:"Batata crinkle média com cheddar cremoso e bacon crocante.", price:31.00, image:images.fries },
+      { category:"Fritos", name:"Batata Crinkle com Cheddar e Bacon Grande", desc:"Batata crinkle grande com cheddar cremoso e bacon crocante.", price:35.00, image:images.fries },
+      { category:"Fritos", name:"Nuggets", desc:"10 unidades de nuggets acompanhados de molho ranch.", price:18.00, image:images.nuggets },
 
-      { category:"Porcoes", name:"12 Und Bolinho de Bacalhau", desc:"Bolinho de bacalhau crocante por fora e macio por dentro.", price:38.00, image:images.cod },
-      { category:"Porcoes", name:"Batata com Bacon & Cheddar Media", desc:"Batatas fritas medias cobertas com bacon crocante e cheddar derretido.", price:27.00, image:images.fries },
-      { category:"Porcoes", name:"Batata G na Caixa de Pizza 25 cm", desc:"Batata frita servida em caixa de pizza de 25cm.", price:45.00, image:images.fries },
-      { category:"Porcoes", name:"Batata Simples Media", desc:"Batata frita media, perfeita para acompanhar qualquer pedido.", price:15.00, image:images.fries },
-      { category:"Porcoes", name:"Batata com Bacon & Cheddar Grande", desc:"Porcao grande de batatas com bacon crocante e cheddar.", price:32.00, image:images.fries },
-      { category:"Porcoes", name:"25 Uni. Salgadinhos", desc:"Selecao variada de salgadinhos para festas ou encontros.", price:20.00, image:images.snack },
-      { category:"Porcoes", name:"Batata Simples Grande", desc:"Batata frita grande, crocante e dourada.", price:19.99, image:images.fries },
-
-      { category:"Combos", name:"Combo Artesanal", desc:"3 Cheddar Burgers, batatas com cheddar e bacon, 25 salgadinhos, 6 aneis de cebola e 2 litros.", price:110.00, image:images.combo },
-      { category:"Combos", name:"Combo para 2 Pessoas", desc:"2 X-tudo suculentos, batatas com cheddar e bacon e acompanhamentos.", price:65.00, image:images.combo },
-      { category:"Combos", name:"Combo para 4 Pessoas", desc:"4 X-tudo, batatas com cheddar e bacon, 25 salgadinhos, aneis de cebola e refrigerante.", price:115.00, image:images.combo },
-      { category:"Combos", name:"COMBO para 3 Pessoas", desc:"3 X-tudo deliciosos, batatas com cheddar e bacon, 20 salgadinhos e 2 litros.", price:89.00, image:images.combo },
-
-      { category:"Acai Tradicional", name:"Acai Tradicional 200ml", desc:"Acai tradicional com acompanhamentos simples, fruta e cobertura a escolha.", price:8.00, image:images.acai },
-      { category:"Acai Tradicional", name:"Acai Tradicional 300ml", desc:"Acai cremoso de 300ml com cobertura a sua escolha.", price:10.00, image:images.acai },
-      { category:"Acai Tradicional", name:"Acai Tradicional 500ml", desc:"Acai de 500ml para matar a vontade.", price:14.00, image:images.acai },
-      { category:"Acai Tradicional", name:"Acai Tradicional 400ml", desc:"Acai de 400ml com fruta e cobertura.", price:12.00, image:images.acai },
-      { category:"Acai Tradicional", name:"Acai Tradicional 700ml", desc:"Acai de 700ml para quem quer reforcar.", price:16.00, image:images.acai },
-      { category:"Acai Tradicional", name:"Acai Tradicional 1 Litro", desc:"Acai tradicional 1 litro com acompanhamentos.", price:25.00, image:images.acai },
-
-      { category:"Sundae", name:"Sundae Morango ou Chocolate 200ml", desc:"Sundae cremoso nos sabores morango ou chocolate.", price:8.00, image:images.sundae },
-      { category:"Milkshakes", name:"Morango ou Chocolate 300ml", desc:"Milkshake cremoso de morango ou chocolate.", price:15.00, image:images.shake },
-
-      { category:"Sucos", name:"Laranja Copo 300ml", desc:"Suco de laranja fresco em copo de 300ml.", price:9.00, image:images.juice },
-      { category:"Sucos", name:"Limao Jarra 1lt", desc:"Jarra de suco de limao, citrico e refrescante.", price:25.00, image:images.juice },
-      { category:"Sucos", name:"Maracuja Copo 300ml", desc:"Suco de maracuja tropical e refrescante.", price:10.00, image:images.juice },
-      { category:"Sucos", name:"Limao Copo 300ml", desc:"Suco de limao em copo de 300ml.", price:8.00, image:images.juice },
-      { category:"Sucos", name:"Laranja Jarra 1lt", desc:"Jarra de suco de laranja para compartilhar.", price:30.00, image:images.juice },
-
-      { category:"Bebidas", name:"Guaravita", desc:"Bebida tradicional sabor guarana.", price:3.00, image:images.drink },
-      { category:"Bebidas", name:"Lata", desc:"Sabores refrescantes em lata. Consulte disponibilidade.", price:6.00, image:images.drink },
-      { category:"Bebidas", name:"Fanta Sabores", desc:"Garrafa de Fanta sabores variados.", price:12.00, image:images.drink },
-      { category:"Bebidas", name:"Guaraviton", desc:"Bebida energetica sabor guarana.", price:7.50, image:images.drink },
-      { category:"Bebidas", name:"Guarana Antarctica 1lt", desc:"Guarana Antarctica versao 1 litro.", price:7.50, image:images.drink },
-      { category:"Bebidas", name:"Coca-Cola 2lt", desc:"Coca-Cola 2 litros para compartilhar.", price:15.00, image:images.drink },
-      { category:"Bebidas", name:"Agua Tonica", desc:"Agua tonica classica e refrescante.", price:6.00, image:images.drink },
-      { category:"Bebidas", name:"Sukita 2lt", desc:"Sukita 2 litros em sabores disponiveis.", price:9.50, image:images.drink },
-      { category:"Bebidas", name:"Coca cola 600 ml", desc:"Coca-Cola 600ml gelada.", price:8.00, image:images.drink },
-
-      { category:"Cachorro quente", name:"Cachorro quente", desc:"Pao, molho, milho, ervilha, ketchup, maionese da casa, ovo de codorna, batata palha, cheddar e catupiry.", price:14.00, image:images.hotdog, featured:true },
-      { category:"Cachorro quente", name:"Cachorro quente de 2 salsicha ou linguica", desc:"Versao reforcada com 2 salsichas ou linguica e acompanhamentos.", price:18.00, image:images.hotdog },
-
-      { category:"Petiscos", name:"Isca de alcatra", desc:"Porcao de isca de alcatra.", price:55.00, image:images.meat },
-      { category:"Petiscos", name:"Frango a passarinho", desc:"Porcao de frango a passarinho.", price:45.00, image:images.cod },
-      { category:"Petiscos", name:"Carne de sol", desc:"Porcao de carne de sol.", price:70.00, image:images.meat },
-      { category:"Petiscos", name:"Calabresa acebolada com fritas", desc:"Calabresa acebolada acompanhada de fritas.", price:35.00, image:images.fries },
-
-      { category:"Hamburguer artesanal", name:"Mega cheddar", desc:"Pao brioche, 2 blends, bacon e muito cheddar.", price:29.00, image:images.burger2 },
-      { category:"Hamburguer artesanal", name:"Mega Bacon", desc:"Pao brioche, 2 blends, muito bacon e cheddar.", price:32.99, image:images.burger },
-      { category:"Hamburguer artesanal", name:"Mega nordestino", desc:"Pao brioche, blend de carne de sol, duplo queijo coalho e molho de ervas finas.", price:28.99, image:images.burger2 },
-      { category:"Hamburguer artesanal", name:"Mega chiken", desc:"Pao brioche, blend de frango empanado, fatias de cheddar e salada.", price:28.99, image:images.burger },
-
-      { category:"Caldos", name:"Caldo de mocoto", desc:"Mocoto, molho, calabresa e bacon.", price:0, image:images.meat, soldOut:true },
-      { category:"Caldos", name:"Caldo de ervilha", desc:"Ervilha, costelinha suina, bacon e calabresa.", price:0, image:images.meat, soldOut:true }
+      { category:"Bebidas", name:"Refrigerante lata", desc:"Coca lata zero ou normal, Sprite, Citrus, Tônica, Guaraná, Fanta uva e laranja. Consulte disponibilidade.", price:8.00, image:images.soda },
+      { category:"Bebidas", name:"Suco Del Valle lata", desc:"Suco Del Valle em lata. Sabores conforme disponibilidade.", price:8.00, image:images.juice },
+      { category:"Bebidas", name:"Guaracamp", desc:"Guaracamp gelado.", price:2.00, image:images.soda },
+      { category:"Bebidas", name:"Mate Leão", desc:"Chá Mate Leão gelado.", price:5.00, image:images.tea },
+      { category:"Bebidas", name:"H2O", desc:"H2O gelada.", price:8.00, image:images.water },
+      { category:"Bebidas", name:"Cerveja long neck", desc:"Cerveja long neck gelada.", price:9.00, image:images.beer },
+      { category:"Bebidas", name:"Água", desc:"Água mineral sem gás.", price:3.00, image:images.water },
+      { category:"Bebidas", name:"Água com gás", desc:"Água mineral com gás.", price:4.00, image:images.water },
+      { category:"Bebidas", name:"Guaraviton", desc:"Guaraviton gelado.", price:8.00, image:images.soda }
     ];
 
     const products = rawProducts.map((item, index) => ({ ...item, id:index }));
@@ -1697,7 +1437,6 @@
 
     const siteHeader = document.getElementById("siteHeader");
     const featuredGrid = document.getElementById("featuredGrid");
-    const promoGrid = document.getElementById("promoGrid");
     const categoryFilters = document.getElementById("categoryFilters");
     const menuContainer = document.getElementById("menuContainer");
     const searchInput = document.getElementById("searchInput");
@@ -1706,6 +1445,7 @@
     const cartTotal = document.getElementById("cartTotal");
     const cartPanel = document.getElementById("cartPanel");
     const overlay = document.getElementById("overlay");
+    const topStatus = document.getElementById("topStatus");
 
     function formatPrice(value){
       return value.toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
@@ -1713,6 +1453,24 @@
 
     function getCategories(){
       return ["Todos", ...new Set(products.map(product => product.category))];
+    }
+
+    function getStoreStatus(){
+      const now = new Date();
+      const day = now.getDay();
+      const minutes = now.getHours() * 60 + now.getMinutes();
+      const open = 19 * 60 + 30;
+      const close = 23 * 60 + 30;
+      const openDays = [0, 5, 6];
+
+      if(openDays.includes(day) && minutes >= open && minutes <= close){
+        return "Loja aberta até 23h30 • Pedido mínimo R$ 4,00";
+      }
+
+      const names = ["domingo", "sexta", "sábado"];
+      const next = [0, 5, 6].find(openDay => openDay > day) ?? 0;
+      const label = names[[0, 5, 6].indexOf(next)];
+      return `Loja fechada, abre ${label} às 19h30 • Pedido mínimo R$ 4,00`;
     }
 
     function renderFeatured(){
@@ -1729,24 +1487,6 @@
               <button class="add-btn" type="button" onclick="addToCart(${item.id})" aria-label="Adicionar ${item.name}">+</button>
             </div>
           </div>
-        </article>
-      `).join("");
-    }
-
-    function renderPromos(){
-      const promos = products.filter(item => item.promo).slice(0, 4);
-
-      promoGrid.innerHTML = promos.map(item => `
-        <article class="promo-card">
-          <div>
-            <h3>${item.name}</h3>
-            <p>${item.desc}</p>
-            <div class="price-row">
-              <span class="price">${formatPrice(item.price)}</span>
-              <button class="add-btn" type="button" onclick="addToCart(${item.id})" aria-label="Adicionar ${item.name}">+</button>
-            </div>
-          </div>
-          <img src="${item.image}" alt="${item.name}" loading="lazy">
         </article>
       `).join("");
     }
@@ -1779,17 +1519,6 @@
       });
     }
 
-    function renderPrice(item){
-      if(item.soldOut){
-        return '<span class="sold-out">Esgotado</span>';
-      }
-
-      const oldPrice = item.oldPrice ? `<span class="old-price">${formatPrice(item.oldPrice)}</span>` : "";
-      const discount = item.discount ? `<span class="discount">${item.discount}</span>` : "";
-
-      return `<span class="product-price">${formatPrice(item.price)}${oldPrice}${discount}</span>`;
-    }
-
     function renderMenu(){
       const filtered = getFilteredProducts();
 
@@ -1804,7 +1533,7 @@
         const items = filtered.filter(item => item.category === category);
 
         return `
-          <section class="menu-category">
+          <section class="menu-category reveal visible">
             <h3>${category}</h3>
             <div class="products-grid">
               ${items.map(item => `
@@ -1813,8 +1542,8 @@
                     <h4>${item.name}</h4>
                     <p>${item.desc}</p>
                     <div class="product-bottom">
-                      ${renderPrice(item)}
-                      ${item.soldOut ? "" : `<button class="add-btn" type="button" onclick="addToCart(${item.id})" aria-label="Adicionar ${item.name}">+</button>`}
+                      <span class="product-price">${formatPrice(item.price)}</span>
+                      <button class="add-btn" type="button" onclick="addToCart(${item.id})" aria-label="Adicionar ${item.name}">+</button>
                     </div>
                   </div>
                   <img src="${item.image}" alt="${item.name}" loading="lazy">
@@ -1828,7 +1557,7 @@
 
     function addToCart(productId){
       const product = products.find(item => item.id === productId);
-      if(!product || product.soldOut) return;
+      if(!product) return;
 
       const existing = cart.find(item => item.id === product.id);
 
@@ -1863,7 +1592,7 @@
       cartTotal.textContent = formatPrice(totalValue);
 
       if(cart.length === 0){
-        cartItems.innerHTML = '<div class="empty-state">Seu pedido esta vazio. Adicione os itens do cardapio.</div>';
+        cartItems.innerHTML = '<div class="empty-state">Seu pedido está vazio. Adicione os itens do cardápio.</div>';
         return;
       }
 
@@ -1873,9 +1602,9 @@
           <div class="cart-line">
             <span>${formatPrice(item.price)}</span>
             <div class="qty">
-              <button type="button" onclick="changeQty(${item.id}, -1)">-</button>
+              <button type="button" onclick="changeQty(${item.id}, -1)" aria-label="Remover uma unidade">-</button>
               <strong>${item.qty}</strong>
-              <button type="button" onclick="changeQty(${item.id}, 1)">+</button>
+              <button type="button" onclick="changeQty(${item.id}, 1)" aria-label="Adicionar uma unidade">+</button>
             </div>
           </div>
         </div>
@@ -1898,7 +1627,7 @@
         return;
       }
 
-      let message = "Ola! Quero fazer um pedido na Mega Lanches:\n\n";
+      let message = "Olá! Quero fazer um pedido na Hamburgueria Artesanal Sa:\n\n";
       let total = 0;
 
       cart.forEach(item => {
@@ -1906,8 +1635,12 @@
         message += `${item.qty}x ${item.name} - ${formatPrice(item.price)}\n`;
       });
 
-      message += `\nTotal: ${formatPrice(total)}\n\n`;
-      message += "Aguardo confirmacao do pedido.";
+      message += `\nTotal: ${formatPrice(total)}\n\nAguardo confirmação do pedido.`;
+
+      if(!NUMERO_WHATSAPP){
+        alert("Pedido montado! Para ativar o envio pelo WhatsApp, informe o número da hamburgueria.");
+        return;
+      }
 
       window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(message)}`, "_blank");
     }
@@ -1928,8 +1661,8 @@
     document.querySelectorAll(".reveal").forEach(element => revealObserver.observe(element));
     searchInput.addEventListener("input", renderMenu);
 
+    topStatus.textContent = getStoreStatus();
     renderFeatured();
-    renderPromos();
     renderCategoryButtons();
     renderMenu();
     updateCart();
